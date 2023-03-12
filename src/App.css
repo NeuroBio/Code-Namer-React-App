@@ -4,6 +4,7 @@
 
 .App-logo {
   height: 40vmin;
+  max-height: max(20vh, 100px);
   pointer-events: none;
 }
 
@@ -15,14 +16,25 @@
 
 .app-header {
   background-color: #10192b;
-  min-height: 20vh;
+  min-height: max(20vh, 100px);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: left;
+  font-size: calc(30px);
   color: whitesmoke;
 }
+
+.starry-night {
+  /* https://projects.verou.me/css3patterns/#starry-night */
+  background-image:
+  radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+  radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+  radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+  radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  }
 
 .app-body {
   background-color: #282c34;

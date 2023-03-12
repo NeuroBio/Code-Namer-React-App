@@ -37,6 +37,7 @@ export class Form extends React.Component {
                     <span className="smollest">Including why you chose to wear <i>those</i> shoes today.</span>
                 </p>
             </section>
+            <hr />
 
             <FormInput label="Test" onUpdate={this.updateTest}/>
 
