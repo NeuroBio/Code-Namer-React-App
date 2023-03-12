@@ -12,12 +12,15 @@ export class Form extends React.Component {
     }
 
     updateTest (input) {
-        console.log(input)
         this.setState({ suggestedName: input });
     };
 
+    submitHandler(e) {
+        e.preventDefault();
+    }
+
     render () {
-        return (<form>
+        return (<form onSubmit={this.submitHandler}>
             Henlo
 
             <FormInput label="Test" onUpdate={this.updateTest}/>
