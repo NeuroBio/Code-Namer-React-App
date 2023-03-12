@@ -1,0 +1,20 @@
+.long-text {
+    padding: 1em;
+    max-width: 600px;
+
+}
+
+.smol {
+    font-size: .9em;
+    color: rgb(196, 196, 196);
+}
+
+.smoller {
+    font-size: .8em;
+    color: rgb(148, 148, 148);
+}
+
+.smollest {
+    font-size: .7em;
+    color: rgb(112, 112, 112);
+}
