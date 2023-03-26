@@ -73,22 +73,31 @@ export class Form extends React.Component {
             <hr />
 
             {/* the form contents */}
-            <section className="form-inputs">
+            <section className="main-form-inputs">
                 <FormRadioSet
                     question="Your code chunk is a:"
                     identifier="main-question"
                     answers={Object.values(SupportedTypes)}
                     onSelection={this.onSelectCodeType}
                 />
-
+            </section>
+            <section className="section-form-inputs">
                 { this.state.codeType === SupportedTypes.FUNCTION
-                    ? <FunctionSection updateName={this.updateName} /> : ''}
+                    ? <FunctionSection
+                        updateName={this.updateName}
+                    /> : ''}
                 { this.state.codeType === SupportedTypes.CLASS
-                    ? <ClassSection updateName={this.updateName} /> : ''}
+                    ? <ClassSection
+                        updateName={this.updateName}
+                    /> : ''}
                 { this.state.codeType === SupportedTypes.OBJECT
-                    ? <ObjectSection updateName={this.updateName} /> : ''}
+                    ? <ObjectSection
+                        updateName={this.updateName}
+                    /> : ''}
                 { this.state.codeType === SupportedTypes.ARRAY
-                    ? <ArraySection updateName={this.updateName} /> : ''}
+                    ? <ArraySection
+                        updateName={this.updateName}
+                    /> : ''}
 
                 {/* <FormInput label="Test" onUpdate={this.updateTest}/> */}
             </section>
@@ -102,6 +111,7 @@ export class Form extends React.Component {
                 </span>
             </p>
             <hr />
+            <br />
         </form>);
     }
 }

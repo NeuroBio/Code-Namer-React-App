@@ -1,4 +1,5 @@
 import React from 'react';
+import './section.css'
 import { Formatter } from '../../services/formatter';
 import { FormRadioSet } from '../form-input/form-radioset';
 import { FormInput } from '../form-input/form-input';
@@ -106,14 +107,14 @@ export class FunctionSection extends React.Component {
             />
 
             { this.state.functionType === FunctionTypes.COMMAND || this.state.functionType === FunctionTypes.BOTH
-            ? <fieldset>
+            ? <fieldset className="form-set">
                 <legend>Command Settings</legend>
                 <FormInput label="The command data/record type (noun)" onUpdate={this.updateCommandRecord}/>
                 <FormInput label="How the data/record is changed (verb)" onUpdate={this.updateCommand}/>               
             </fieldset>
             : ''}
             { this.state.functionType === FunctionTypes.QUERY || this.state.functionType === FunctionTypes.BOTH
-            ? <fieldset>
+            ? <fieldset className="form-set">
                 <legend>Query Settings</legend>
                 <FormInput label="The query data/record type (noun)" onUpdate={this.updateQueryRecord}/>
                 <FormInput label="If not fetching instances of the data/record type, what property are they chosen by?" onUpdate={this.updateQuery}/>

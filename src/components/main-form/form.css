@@ -19,8 +19,12 @@
     color: rgb(112, 112, 112);
 }
 
-.form-inputs {
+.main-form-inputs {
     margin-left: 2em;
+ }
+
+.section-form-inputs {
+    margin-left: 3.5em;
 }
 
 #form-results {
