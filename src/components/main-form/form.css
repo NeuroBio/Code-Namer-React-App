@@ -18,3 +18,17 @@
     font-size: .7em;
     color: rgb(112, 112, 112);
 }
+
+.form-inputs {
+    margin-left: 2em;
+}
+
+#form-results {
+    margin-left: 2em
+}
+#result-label {
+    font-size: 1.5em;    
+}
+#result {
+    font-size: 3em;
+}

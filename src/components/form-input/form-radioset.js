@@ -1,6 +1,6 @@
 import React from 'react';
 import './form-input.css';
-import { FormRadioButton} from './form-radiobutton';
+import { FormRadioButton } from './form-radiobutton';
 
 export class FormRadioSet extends React.Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export class FormRadioSet extends React.Component {
     }
 
     render() {
-        return ( <fieldset>
+        return ( <fieldset className='form-radio-set'>
             <legend>{ this.props.question }</legend>           
         
             {this.props.answers.map((answer, i) => {

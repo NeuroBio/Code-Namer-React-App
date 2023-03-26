@@ -1,7 +1,7 @@
 import React from 'react';
-import { FormInput } from '../form-input/form-input';
-import { FormRadioSet } from '../form-input/form-radioset';
 import './form.css';
+// import { FormInput } from '../form-input/form-input';
+import { FormRadioSet } from '../form-input/form-radioset';
 import { FunctionSection } from '../type-sections/function-section';
 import { ClassSection } from '../type-sections/class-section';
 import { ObjectSection } from '../type-sections/object-section';
@@ -18,22 +18,35 @@ export class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            suggestedName: 'initial',
+            suggestedName: '',
             codeType: '',
         }
 
-        this.updateTest = this.updateTest.bind(this);
+        // local functions
+        // this.updateTest = this.updateTest.bind(this);
+        this.updateName = this.updateName.bind(this);
         this.onSelectCodeType = this.onSelectCodeType.bind(this);
+
+        // access to sections
+        // this.functionRef= React.createRef();
+        // this.classRef= React.createRef();
+        // this.arrayRef= React.createRef();
+        // this.objectRef= React.createRef();
     }
 
 
     onSelectCodeType (selection) {
-        this.setState({ codeType: selection });
+        this.setState({ codeType: selection }, this.updateName);
     }
 
-    updateTest (input) {
-        this.setState({ suggestedName: input });
-    };
+    // updateTest (input) {
+    //     this.setState({ suggestedName: input });
+    // };
+
+    updateName (input) {
+        console.log(input)
+        this.setState({ suggestedName: input || '' });
+    }
 
     submitHandler(e) {
         e.preventDefault();
@@ -60,28 +73,35 @@ export class Form extends React.Component {
             <hr />
 
             {/* the form contents */}
-            <FormRadioSet
-            question="What is your code chunk?"
-            identifier="main-question"
-            answers={Object.values(SupportedTypes)}
-            onSelection={this.onSelectCodeType}
-            />
+            <section className="form-inputs">
+                <FormRadioSet
+                    question="Your code chunk is a:"
+                    identifier="main-question"
+                    answers={Object.values(SupportedTypes)}
+                    onSelection={this.onSelectCodeType}
+                />
 
-            { this.state.codeType === SupportedTypes.FUNCTION ? <FunctionSection /> : ''}
-            { this.state.codeType === SupportedTypes.CLASS ? <ClassSection /> : ''}
-            { this.state.codeType === SupportedTypes.OBJECT ? <ObjectSection /> : ''}
-            { this.state.codeType === SupportedTypes.ARRAY ? <ArraySection /> : ''}
+                { this.state.codeType === SupportedTypes.FUNCTION
+                    ? <FunctionSection updateName={this.updateName} /> : ''}
+                { this.state.codeType === SupportedTypes.CLASS
+                    ? <ClassSection updateName={this.updateName} /> : ''}
+                { this.state.codeType === SupportedTypes.OBJECT
+                    ? <ObjectSection updateName={this.updateName} /> : ''}
+                { this.state.codeType === SupportedTypes.ARRAY
+                    ? <ArraySection updateName={this.updateName} /> : ''}
 
-            <FormInput label="Test" onUpdate={this.updateTest}/>
-
+                {/* <FormInput label="Test" onUpdate={this.updateTest}/> */}
+            </section>
 
             {/* result */}
-            <p>
-                <label htmlFor="result">Suggested Name: </label>
+            <p id="form-results">
+                <label id="result-label" htmlFor="result">Suggested Name: </label>
+                <br />
                 <span id="result">
                     { this.state.suggestedName}
                 </span>
             </p>
+            <hr />
         </form>);
     }
 }
