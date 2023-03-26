@@ -1,5 +1,5 @@
 export class Formatter {
-    static combineAllVars (vars) {
+    static combineAllNameParts (vars) {
        let formatted = this.toCamelCase(vars[0]);
        vars
         .slice(1)
