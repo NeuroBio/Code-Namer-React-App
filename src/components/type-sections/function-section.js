@@ -94,8 +94,6 @@ export class FunctionSection extends React.Component {
                 break;
         }
     }
-    
-    
 
     render() {
         return (<div>
@@ -109,8 +107,8 @@ export class FunctionSection extends React.Component {
             { this.state.functionType === FunctionTypes.COMMAND || this.state.functionType === FunctionTypes.BOTH
             ? <fieldset className="form-set">
                 <legend>Command Settings</legend>
+                <FormInput label="How the data/record is changed (verb)" onUpdate={this.updateCommand}/>
                 <FormInput label="The command data/record type (noun)" onUpdate={this.updateCommandRecord}/>
-                <FormInput label="How the data/record is changed (verb)" onUpdate={this.updateCommand}/>               
             </fieldset>
             : ''}
             { this.state.functionType === FunctionTypes.QUERY || this.state.functionType === FunctionTypes.BOTH

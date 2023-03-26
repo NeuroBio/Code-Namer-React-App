@@ -31,8 +31,12 @@
     margin-left: 2em
 }
 #result-label {
-    font-size: 1.5em;    
+    font-size: 1em;
+    font-weight: bold;
 }
 #result {
-    font-size: 3em;
+    font-size: 1em;
+    font-family:'Courier New', Courier, monospace;
+    background-color: black;
+    margin: .5em;
 }
