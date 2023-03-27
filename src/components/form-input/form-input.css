@@ -5,3 +5,18 @@
 .form-radio-set {
     max-width: 500px;
 }
+
+.basic-button {
+    display: flex;
+    background-color: #61DAFB;
+    padding: 1em;
+    border-radius: 1.5em;
+}
+
+.basic-button:hover {
+    background-color: #bdeaf7;
+}
+
+.basic-button:active {
+    background-color: #4bb7d4;
+}

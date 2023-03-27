@@ -1,4 +1,6 @@
 import React from 'react';
+import './form-input.css';
+import { IoMdRefresh } from 'react-icons/io';
 import { PastaChef } from '../../services/pasta-chef';
 
 export class PastaShop extends React.Component {
@@ -15,7 +17,12 @@ export class PastaShop extends React.Component {
     render() {
         return (<article>
            <p>{this.props.shopName}</p>
-           <button onClick={this.onPastaRefresh}>Refresh Pasta</button>
+           <button
+                type="button"
+                className="basic-button"
+                onClick={this.onPastaRefresh}>
+                <IoMdRefresh />  Refresh Pasta
+            </button>
         </article>);
     }
 }
