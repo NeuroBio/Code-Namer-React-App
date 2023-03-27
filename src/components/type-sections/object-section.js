@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormRadioSet } from '../form-input/form-radioset';
+import { PastaShop } from '../form-input/pasta-shop';
 import { PastaChef } from '../../services/pasta-chef';
 import { FormInput } from '../form-input/form-input';
 
@@ -16,16 +17,20 @@ export class ObjectSection extends React.Component {
 
         this.onSelectType = this.onSelectType.bind(this);
         this.buildName = this.buildName.bind(this);
+
+        this.updatePasta = this.updatePasta.bind(this);
     }
 
     onSelectType (selection) {
-        console.log(selection)
-        console.log(ObjectTypes.OTHER)
         this.setState({ objectType: selection }, this.buildName);
     }
 
     updateInstanceRecord (input) {
         this.setState({ instanceRecord: input }, this.buildName);
+    }
+
+    updatePasta(pasta) {
+        this.props.updateName(pasta);
     }
 
     buildName () {
@@ -36,7 +41,7 @@ export class ObjectSection extends React.Component {
             case ObjectTypes.KEYED_LIST:
                 break;
             case ObjectTypes.OTHER:
-                this.props.updateName(PastaChef.bakePasta());
+                this.updatePasta(PastaChef.bakePasta());
                 break;
             default:
                 break;
@@ -53,8 +58,10 @@ export class ObjectSection extends React.Component {
             />
 
             { this.state.objectType === ObjectTypes.OTHER
-            ? 'Consider making a class instead...'
-            : ''}
+            ? <PastaShop
+                shopName="Consider making a class instead..."
+                updatePasta={this.updatePasta}
+            /> : ''}
             { this.state.functionType === ObjectTypes.INSTANCE
             ?  <FormInput label="The data/record type (noun)" onUpdate={this.updateInstanceRecord}/>
             : ''}
