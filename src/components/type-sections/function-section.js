@@ -24,10 +24,11 @@ export class FunctionSection extends React.Component {
         
         this.updateCommandRecord = this.updateCommandRecord.bind(this);
         this.updateCommand = this.updateCommand.bind(this);
+        this.onSelectCommandPlural = this.onSelectCommandPlural.bind(this);
 
         this.updateQueryRecord = this.updateQueryRecord.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
-        this.onSelectPlural = this.onSelectPlural.bind(this);
+        this.onSelectQueryPlural = this.onSelectQueryPlural.bind(this);
 
         this.buildName = this.buildName.bind(this);
     }
@@ -42,6 +43,9 @@ export class FunctionSection extends React.Component {
     updateCommand (input) {
         this.setState({ command: input }, this.buildName);
     }
+    onSelectCommandPlural (selection) {
+        this.setState({ commandPlural: selection }, this.buildName);
+    }
 
     updateQueryRecord(input) {
         this.setState({ queryRecord: input }, this.buildName);
@@ -49,31 +53,35 @@ export class FunctionSection extends React.Component {
     updateQuery (input) {
         this.setState({ query: input }, this.buildName);
     }
-    onSelectPlural (selection) {
-        this.setState({ pluralType: selection }, this.buildName);
+    onSelectQueryPlural (selection) {
+        this.setState({ queryPlural: selection }, this.buildName);
     }
 
     buildName () {
         const {
             command,
             commandRecord,
+            commandPlural,
             query,
             queryRecord,
-            pluralType,
+            queryPlural,
         } = this.state;
         switch (this.state.functionType) {
             case FunctionTypes.COMMAND:
                 if (command && commandRecord) {
-                    const suggestedName = Formatter.combineAllNameParts([ command, commandRecord]);
+                    const nameParts = [command];
+                    console.log('here: ', commandPlural)
+                    nameParts.push(`${commandRecord}${commandPlural === Binary.TRUE ? 's' : ''}`);
+                    const suggestedName = Formatter.combineAllNameParts(nameParts);
                     this.props.updateName(suggestedName);
                 }
                 break;
             case FunctionTypes.QUERY:
                 if (queryRecord) {
-                    let nameParts = [ 'get', queryRecord];
+                    const nameParts = [ 'get', queryRecord];
                     if (query) {
                         nameParts.push('by');
-                        nameParts.push(`${query}${pluralType === Binary.TRUE ? 's' : ''}`);
+                        nameParts.push(`${query}${queryPlural === Binary.TRUE ? 's' : ''}`);
                     }
                     const suggestedName = Formatter.combineAllNameParts(nameParts);
                     this.props.updateName(suggestedName);
@@ -81,10 +89,10 @@ export class FunctionSection extends React.Component {
                 break;
             case FunctionTypes.BOTH:
                 if (command && commandRecord && queryRecord) {
-                    let nameParts = [ command, commandRecord, 'and', 'get', queryRecord]
+                    const nameParts = [ command, commandRecord, 'and', 'get', queryRecord]
                     if (query) {
                         nameParts.push('by');
-                        nameParts.push(`${query}${pluralType === Binary.TRUE ? 's' : ''}`);
+                        nameParts.push(`${query}${queryPlural === Binary.TRUE ? 's' : ''}`);
                     }
                     const suggestedName = Formatter.combineAllNameParts(nameParts);
                     this.props.updateName(suggestedName);
@@ -109,6 +117,12 @@ export class FunctionSection extends React.Component {
                 <legend>Command Settings</legend>
                 <FormInput label="How the data/record is changed (verb)" onUpdate={this.updateCommand}/>
                 <FormInput label="The command data/record type (noun)" onUpdate={this.updateCommandRecord}/>
+                <FormRadioSet
+                    question="Is more than one instance of the record acted on?"
+                    identifier="plural-command"
+                    answers={Object.values(Binary)}
+                    onSelection={this.onSelectCommandPlural}
+                />
             </fieldset>
             : ''}
             { this.state.functionType === FunctionTypes.QUERY || this.state.functionType === FunctionTypes.BOTH
@@ -118,9 +132,9 @@ export class FunctionSection extends React.Component {
                 <FormInput label="If not fetching instances of the data/record type, what property are they chosen by?" onUpdate={this.updateQuery}/>
                 <FormRadioSet
                     question="Is the property an array or single value?"
-                    identifier="plual"
+                    identifier="plural-query"
                     answers={Object.values(Binary)}
-                    onSelection={this.onSelectPlural}
+                    onSelection={this.onSelectQueryPlural}
                 />
             </fieldset>
             : '' }
