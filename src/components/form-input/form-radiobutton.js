@@ -1,5 +1,6 @@
 import React from 'react';
 import './form-input.css';
+import { ToolTip } from './tooltip'
 
 export class FormRadioButton extends React.Component {
     constructor(props) {
@@ -20,7 +21,10 @@ export class FormRadioButton extends React.Component {
                 value={this.props.value}
                 name={this.props.name}
                 onChange={this.onSelection}/>
-            <label htmlFor={this.props.id}>{this.props.value}</label>
+            <label htmlFor={this.props.id}>
+                {this.props.value}
+                <ToolTip help={this.props.help} />
+            </label>
          </div>);
     }
 }

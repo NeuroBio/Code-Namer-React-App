@@ -1,6 +1,5 @@
 import React from 'react';
 import './form.css';
-// import { FormInput } from '../form-input/form-input';
 import { FormRadioSet } from '../form-input/form-radioset';
 import { FunctionSection } from '../type-sections/function-section';
 import { ClassSection } from '../type-sections/class-section';
@@ -8,10 +7,10 @@ import { ObjectSection } from '../type-sections/object-section';
 import { ArraySection } from '../type-sections/array-section';
 
 const SupportedTypes = {
-    FUNCTION: 'Function',
-    CLASS: 'Class',
-    OBJECT: 'Object',
-    ARRAY: 'Array'
+    FUNCTION: { answer: 'Function' },
+    CLASS: { answer: 'Class' },
+    OBJECT: { answer: 'Object' },
+    ARRAY: { answer: 'Array' }
 };
 
 export class Form extends React.Component {
@@ -22,26 +21,14 @@ export class Form extends React.Component {
             codeType: '',
         }
 
-        // local functions
-        // this.updateTest = this.updateTest.bind(this);
         this.updateName = this.updateName.bind(this);
         this.onSelectCodeType = this.onSelectCodeType.bind(this);
-
-        // access to sections
-        // this.functionRef= React.createRef();
-        // this.classRef= React.createRef();
-        // this.arrayRef= React.createRef();
-        // this.objectRef= React.createRef();
     }
 
 
     onSelectCodeType (selection) {
         this.setState({ codeType: selection }, this.updateName);
     }
-
-    // updateTest (input) {
-    //     this.setState({ suggestedName: input });
-    // };
 
     updateName (input) {
         console.log(input)
@@ -82,24 +69,22 @@ export class Form extends React.Component {
                 />
             </section>
             <section className="section-form-inputs">
-                { this.state.codeType === SupportedTypes.FUNCTION
+                { this.state.codeType === SupportedTypes.FUNCTION.answer
                     ? <FunctionSection
                         updateName={this.updateName}
                     /> : ''}
-                { this.state.codeType === SupportedTypes.CLASS
+                { this.state.codeType === SupportedTypes.CLASS.answer
                     ? <ClassSection
                         updateName={this.updateName}
                     /> : ''}
-                { this.state.codeType === SupportedTypes.OBJECT
+                { this.state.codeType === SupportedTypes.OBJECT.answer
                     ? <ObjectSection
                         updateName={this.updateName}
                     /> : ''}
-                { this.state.codeType === SupportedTypes.ARRAY
+                { this.state.codeType === SupportedTypes.ARRAY.answer
                     ? <ArraySection
                         updateName={this.updateName}
                     /> : ''}
-
-                {/* <FormInput label="Test" onUpdate={this.updateTest}/> */}
             </section>
 
             {/* result */}

@@ -6,9 +6,9 @@ import { PastaChef } from '../../services/pasta-chef';
 import { FormInput } from '../form-input/form-input';
 
 const ObjectTypes = {
-    INSTANCE: 'instance of a data/record type',
-    KEYED_LIST: 'list of records/data keyed by something',
-    OTHER: 'Some other amalgum of code that includes functions as properties'
+    INSTANCE: { answer: 'instance of a data/record type' },
+    KEYED_LIST: { answer: 'list of records/data keyed by something' },
+    OTHER: { answer: 'Some other amalgum of code that includes functions as properties' }
 }
 
 export class ObjectSection extends React.Component {
@@ -56,20 +56,20 @@ export class ObjectSection extends React.Component {
             keyProperty,
         } = this.state;
         switch (objectType) {
-            case ObjectTypes.INSTANCE:
+            case ObjectTypes.INSTANCE.answer:
                 if (instanceRecord) {
                     const suggestedName = Formatter.combineAllNameParts([instanceRecord]);
                     this.props.updateName(suggestedName);
                 }
                 break;
-            case ObjectTypes.KEYED_LIST:
+            case ObjectTypes.KEYED_LIST.answer:
                 if (valueRecord && keyProperty) {
                     const nameParts = [`${valueRecord}s`, 'keyed', 'by', keyProperty];
                     const suggestedName = Formatter.combineAllNameParts(nameParts);
                     this.props.updateName(suggestedName);
                 }
                 break;
-            case ObjectTypes.OTHER:
+            case ObjectTypes.OTHER.answer:
                 this.updatePasta(PastaChef.bakePasta());
                 break;
             default:
@@ -86,15 +86,15 @@ export class ObjectSection extends React.Component {
                 onSelection={this.onSelectType}
             />
 
-            { this.state.objectType === ObjectTypes.OTHER
+            { this.state.objectType === ObjectTypes.OTHER.answer
             ? <PastaShop
                 shopName="Consider making a class instead..."
                 updatePasta={this.updatePasta}
             /> : ''}
-            { this.state.objectType === ObjectTypes.INSTANCE
+            { this.state.objectType === ObjectTypes.INSTANCE.answer
             ?  <FormInput label="The data/record type (noun)" onUpdate={this.updateInstanceRecord}/>
             : ''}
-             { this.state.objectType === ObjectTypes.KEYED_LIST
+             { this.state.objectType === ObjectTypes.KEYED_LIST.answer
             ?
             <fieldset>
                 <FormInput label="The value data/record type (noun)" onUpdate={this.updateValueRecord}/>

@@ -6,9 +6,9 @@ import { FormInput } from '../form-input/form-input';
 
 
 const FunctionTypes = {
-    COMMAND: 'Command (changes data or a record type)',
-    QUERY: 'Query (fetches data or a record type)',
-    BOTH: 'The dreaded Command/Query (does both)',
+    COMMAND: { answer: 'Command', help: 'changes data or a record type' },
+    QUERY: { answer: 'Query', help: 'fetches data or a record type' },
+    BOTH: { answer: 'The dreaded Command/Query', help:'does both' },
 };
 
 const Binary = {
@@ -67,7 +67,7 @@ export class FunctionSection extends React.Component {
             queryPlural,
         } = this.state;
         switch (this.state.functionType) {
-            case FunctionTypes.COMMAND:
+            case FunctionTypes.COMMAND.answer:
                 if (command && commandRecord) {
                     const nameParts = [command];
                     nameParts.push(`${commandRecord}${commandPlural === Binary.TRUE ? 's' : ''}`);
@@ -75,7 +75,7 @@ export class FunctionSection extends React.Component {
                     this.props.updateName(suggestedName);
                 }
                 break;
-            case FunctionTypes.QUERY:
+            case FunctionTypes.QUERY.answer:
                 if (queryRecord) {
                     const nameParts = [ 'get', queryRecord];
                     if (query) {
@@ -86,7 +86,7 @@ export class FunctionSection extends React.Component {
                     this.props.updateName(suggestedName);
                 }
                 break;
-            case FunctionTypes.BOTH:
+            case FunctionTypes.BOTH.answer:
                 if (command && commandRecord && queryRecord) {
                     const nameParts = [ command, commandRecord, 'and', 'get', queryRecord]
                     if (query) {
@@ -111,7 +111,7 @@ export class FunctionSection extends React.Component {
                 onSelection={this.onSelectType}
             />
 
-            { this.state.functionType === FunctionTypes.COMMAND || this.state.functionType === FunctionTypes.BOTH
+            { this.state.functionType === FunctionTypes.COMMAND.answer || this.state.functionType === FunctionTypes.BOTH.answer
             ? <fieldset className="form-set">
                 <legend>Command Settings</legend>
                 <FormInput label="How the data/record is changed (verb)" onUpdate={this.updateCommand}/>
@@ -124,7 +124,7 @@ export class FunctionSection extends React.Component {
                 />
             </fieldset>
             : ''}
-            { this.state.functionType === FunctionTypes.QUERY || this.state.functionType === FunctionTypes.BOTH
+            { this.state.functionType === FunctionTypes.QUERY.answer || this.state.functionType === FunctionTypes.BOTH.answer
             ? <fieldset className="form-set">
                 <legend>Query Settings</legend>
                 <FormInput label="The query data/record type (noun)" onUpdate={this.updateQueryRecord}/>

@@ -20,7 +20,8 @@ export class FormRadioSet extends React.Component {
             {this.props.answers.map((answer, i) => {
                 const key = `${this.props.identifier}-${i}`
                 return (<FormRadioButton
-                        value={answer}
+                        value={answer.answer}
+                        help={answer.help}
                         key={key}
                         id={key}
                         name={this.props.identifier}
