@@ -70,7 +70,6 @@ export class FunctionSection extends React.Component {
             case FunctionTypes.COMMAND:
                 if (command && commandRecord) {
                     const nameParts = [command];
-                    console.log('here: ', commandPlural)
                     nameParts.push(`${commandRecord}${commandPlural === Binary.TRUE ? 's' : ''}`);
                     const suggestedName = Formatter.combineAllNameParts(nameParts);
                     this.props.updateName(suggestedName);
