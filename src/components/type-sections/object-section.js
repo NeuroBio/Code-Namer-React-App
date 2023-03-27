@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormRadioSet } from '../form-input/form-radioset';
+import { Formatter } from '../../services/formatter';
 import { PastaShop } from '../form-input/pasta-shop';
 import { PastaChef } from '../../services/pasta-chef';
 import { FormInput } from '../form-input/form-input';
@@ -16,9 +17,15 @@ export class ObjectSection extends React.Component {
         this.state = {};
 
         this.onSelectType = this.onSelectType.bind(this);
-        this.buildName = this.buildName.bind(this);
+        this.updateInstanceRecord = this.updateInstanceRecord.bind(this);
+
+        this.updateKeyProperty = this.updateKeyProperty.bind(this);
 
         this.updatePasta = this.updatePasta.bind(this);
+        this.updateValueRecord = this.updateValueRecord.bind(this);
+
+        this.buildName = this.buildName.bind(this);
+
     }
 
     onSelectType (selection) {
@@ -29,16 +36,38 @@ export class ObjectSection extends React.Component {
         this.setState({ instanceRecord: input }, this.buildName);
     }
 
+    updateValueRecord (input) {
+        this.setState({ valueRecord: input }, this.buildName);
+    }
+
+    updateKeyProperty (input) {
+        this.setState({ keyProperty: input }, this.buildName);
+    }
+
     updatePasta(pasta) {
         this.props.updateName(pasta);
     }
 
     buildName () {
-        const { objectType } = this.state;
+        const {
+            objectType,
+            instanceRecord,
+            valueRecord,
+            keyProperty,
+        } = this.state;
         switch (objectType) {
             case ObjectTypes.INSTANCE:
+                if (instanceRecord) {
+                    const suggestedName = Formatter.combineAllNameParts([instanceRecord]);
+                    this.props.updateName(suggestedName);
+                }
                 break;
             case ObjectTypes.KEYED_LIST:
+                if (valueRecord && keyProperty) {
+                    const nameParts = [`${valueRecord}s`, 'keyed', 'by', keyProperty];
+                    const suggestedName = Formatter.combineAllNameParts(nameParts);
+                    this.props.updateName(suggestedName);
+                }
                 break;
             case ObjectTypes.OTHER:
                 this.updatePasta(PastaChef.bakePasta());
@@ -52,7 +81,7 @@ export class ObjectSection extends React.Component {
         return (<div>
             <FormRadioSet
                 question="The object is:"
-                identifier="function-type"
+                identifier="object-type"
                 answers={Object.values(ObjectTypes)}
                 onSelection={this.onSelectType}
             />
@@ -62,11 +91,15 @@ export class ObjectSection extends React.Component {
                 shopName="Consider making a class instead..."
                 updatePasta={this.updatePasta}
             /> : ''}
-            { this.state.functionType === ObjectTypes.INSTANCE
+            { this.state.objectType === ObjectTypes.INSTANCE
             ?  <FormInput label="The data/record type (noun)" onUpdate={this.updateInstanceRecord}/>
             : ''}
-             { this.state.functionType === ObjectTypes.KEYED_LIST
-            ? <p>Consider making a class instead...</p>
+             { this.state.objectType === ObjectTypes.KEYED_LIST
+            ?
+            <fieldset>
+                <FormInput label="The value data/record type (noun)" onUpdate={this.updateValueRecord}/>
+                <FormInput label="The property the values are keyed by (noun)" onUpdate={this.updateKeyProperty}/>
+            </fieldset>
             : ''}
          </div>);
     }
