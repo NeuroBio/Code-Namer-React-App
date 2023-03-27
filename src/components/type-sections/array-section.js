@@ -24,7 +24,7 @@ export class ArraySection extends React.Component {
 
     render() {
         return (<div>
-             <FormInput label="The data/record type the array holds (noun)" onUpdate={this.updateRecord}/>
+            <FormInput label="The data/record type the array holds (noun)" onUpdate={this.updateRecord}/>
          </div>);
     }
 }
