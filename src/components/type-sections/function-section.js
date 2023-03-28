@@ -13,7 +13,7 @@ const FunctionTypes = {
 
 const Binary = {
     TRUE: { answer: 'Yes' },
-    FALSE: { answer: 'No' },
+    FALSE: { answer: 'No', default: true },
 }
 export class FunctionSection extends React.Component {
     constructor(props) {

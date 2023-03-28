@@ -182,7 +182,7 @@ export class ClassSection extends React.Component {
             { this.state.classType === ClassTypes.ENTITY.answer
             ? <FormInput label="The data/record type being modeled (noun)" onUpdate={this.updateEntityRecord}/> : ''}
             { this.state.classType === ClassTypes.BUSINESS.answer
-            ? <FormInput label="The function business area uniting the code (noun)" onUpdate={this.updateBusinessRecord}/> : ''}
+            ? <FormInput label="The business area uniting the code (noun)" onUpdate={this.updateBusinessRecord}/> : ''}
          </div>);
     }
 }

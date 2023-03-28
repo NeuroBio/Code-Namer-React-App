@@ -20,7 +20,8 @@ export class FormRadioButton extends React.Component {
                 id={this.props.id}
                 value={this.props.value}
                 name={this.props.name}
-                onChange={this.onSelection}/>
+                onChange={this.onSelection}
+                defaultChecked={this.props.default}/>
             <label htmlFor={this.props.id}>
                 {this.props.value}
                 <ToolTip help={this.props.help} />

@@ -14,7 +14,7 @@ const SupportedTypes = {
 };
 
 const ReviewerTypes = {
-    JONES: { answer: 'Jones', help: 'verbose = true'},
+    JONES: { answer: 'Jones', help: 'verbose = true', default: true },
     JEREMY: { answer: 'Jeremy', help: 'verbose = false'},
     BOTH: { answer: 'Both', help: 'verbose = trufalse'},
 }
@@ -26,11 +26,13 @@ export class Form extends React.Component {
             jeremyName: '',
             jonesName: '',
             codeType: '',
+            reviewerType: ReviewerTypes.JONES.answer,
         }
 
         this.updateName = this.updateName.bind(this);
         this.onSelectCodeType = this.onSelectCodeType.bind(this);
         this.onSelectReviewerType = this.onSelectReviewerType.bind(this);
+
     }
 
 
@@ -43,7 +45,6 @@ export class Form extends React.Component {
     }
 
     updateName (input) {
-        console.log('trigger')
         this.setState({ jonesName: input?.jonesName || '' });
         this.setState({ jeremyName: input?.jeremyName || '' });
     }

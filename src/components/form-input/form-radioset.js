@@ -25,6 +25,7 @@ export class FormRadioSet extends React.Component {
                         key={key}
                         id={key}
                         name={this.props.identifier}
+                        default={answer.default}
                         onSelection={this.onSelection}
                     />)
             })}

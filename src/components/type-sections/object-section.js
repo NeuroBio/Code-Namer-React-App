@@ -69,7 +69,7 @@ export class ObjectSection extends React.Component {
             case ObjectTypes.KEYED_LIST.answer:
                 if (valueRecord && keyProperty) {
                     const jeremyName = Formatter.combineAllNameParts([
-                        `${ Formatter.jeremyTruncate(valueRecord)}s`, 'keyed', 'by', keyProperty
+                        `${ Formatter.jeremyTruncate(valueRecord)}s`, 'by', keyProperty
                     ]);;
                     const jonesName = Formatter.combineAllNameParts([
                         `${valueRecord}s`, 'keyed', 'by', keyProperty
@@ -78,7 +78,6 @@ export class ObjectSection extends React.Component {
                 }
                 break;
             case ObjectTypes.OTHER.answer:
-                console.log('here')
                 this.updatePasta([
                     PastaChef.bakePasta(),
                     PastaChef.bakePasta(),
@@ -112,7 +111,7 @@ export class ObjectSection extends React.Component {
             ?
             <fieldset>
                 <FormInput label="The value data/record type (noun)" onUpdate={this.updateValueRecord}/>
-                <FormInput label="The property the values are keyed by (noun)" onUpdate={this.updateKeyProperty}/>
+                <FormInput label="The property the values are keyed by" onUpdate={this.updateKeyProperty}/>
             </fieldset>
             : ''}
          </div>);
