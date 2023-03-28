@@ -1,13 +1,22 @@
 export class Formatter {
-    static combineAllNameParts (vars) {
-       let formatted = this.toCamelCase(vars[0]);
-       vars
+    static combineAllNameParts (nameParts) {
+       let formatted = this.toCamelCase(nameParts[0]);
+       nameParts
         .slice(1)
         .forEach((variable) => {
             formatted += this.toPascalCase(variable);
         });
         return formatted;
     }
+
+    static combineAllNamePartsForClass (nameParts) {
+        let formatted = '';
+        nameParts.forEach((variable) => {
+            formatted += this.toPascalCase(variable);
+        });
+        return formatted;
+     }
+
     static toCamelCase (input) {
         return input
             .split(' ')
@@ -22,7 +31,8 @@ export class Formatter {
             })
             .join('');
     }
-    static toPascalCase(input) {
+
+    static toPascalCase (input) {
         return input
             .split(' ')
             .map((word) => {

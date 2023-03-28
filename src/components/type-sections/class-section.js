@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formatter } from '../../services/formatter';
 import { FormRadioSet } from '../form-input/form-radioset';
+import { FormInput } from '../form-input/form-input';
 
 const ClassTypes = {
     REPO: { answer: 'Repo' , help: 'Stores common, reusable queries for a record type' },
@@ -17,6 +18,13 @@ export class ClassSection extends React.Component {
 
         this.onSelectType = this.onSelectType.bind(this);
 
+        this.updateRepoRecord = this.updateRepoRecord.bind(this);
+        this.updateFactoryRecord = this.updateFactoryRecord.bind(this);
+        this.updateSmartFlow = this.updateSmartFlow.bind(this);
+        this.updateValueRecord = this.updateValueRecord.bind(this);
+        this.updateEntityRecord = this.updateEntityRecord.bind(this);
+        this.updateBusinessRecord = this.updateBusinessRecord.bind(this);
+
         this.buildName = this.buildName.bind(this);
     }
 
@@ -25,21 +33,76 @@ export class ClassSection extends React.Component {
         this.setState({ classType: selection }, this.buildName);
     }
 
+    updateRepoRecord (input) {
+        this.setState({ repoRecord: input }, this.buildName);
+    }
+
+    updateFactoryRecord (input) {
+        this.setState({ factoryRecord: input }, this.buildName);
+    }
+
+    updateSmartFlow (input) {
+        this.setState({ smartFlow: input }, this.buildName);
+    }
+
+    updateValueRecord (input) {
+        this.setState({ valueRecord: input }, this.buildName);
+    }
+
+    updateEntityRecord (input) {
+        this.setState({ entityRecord: input }, this.buildName);
+    }
+
+    updateBusinessRecord (input) {
+        this.setState({ buisinessRecord: input }, this.buildName);
+    }
+
     buildName () {
         const {
+            classType,
+            repoRecord,
+            factoryRecord,
+            smartFlow,
+            valueRecord,
+            entityRecord,
+            buisinessRecord
         } = this.state;
-        switch (this.state.classType) {
-            case ClassTypes.REPO:
+        switch (classType) {
+            case ClassTypes.REPO.answer:
+                if (repoRecord) {
+                    const suggestedName = Formatter.combineAllNamePartsForClass([ repoRecord, 'repo' ]);
+                    this.props.updateName(suggestedName);
+                }
                 break;
-            case ClassTypes.FACTORY:
+            case ClassTypes.FACTORY.answer:
+                if (factoryRecord) {
+                    const suggestedName = Formatter.combineAllNamePartsForClass([ factoryRecord, 'factory' ]);
+                    this.props.updateName(suggestedName);
+                }
                 break;
-            case ClassTypes.FUNCTION:
+            case ClassTypes.FUNCTION.answer:
+                if (smartFlow) {
+                    const suggestedName = Formatter.combineAllNamePartsForClass([ smartFlow ]);
+                    this.props.updateName(suggestedName);
+                }
                 break;
-            case ClassTypes.VALUE_OBJECT:
+            case ClassTypes.VALUE_OBJECT.answer:
+                if (valueRecord) {
+                    const suggestedName = Formatter.combineAllNamePartsForClass([ valueRecord ]);
+                    this.props.updateName(suggestedName);
+                }
                 break;
-            case ClassTypes.ENTITY:
+            case ClassTypes.ENTITY.answer:
+                if (entityRecord) {
+                    const suggestedName = Formatter.combineAllNamePartsForClass([ entityRecord ]);
+                    this.props.updateName(suggestedName);
+                }
                 break;
-            case ClassTypes.BUSINESS:
+            case ClassTypes.BUSINESS.answer:
+                if (buisinessRecord) {
+                    const suggestedName = Formatter.combineAllNamePartsForClass([ ]);
+                    this.props.updateName(suggestedName);
+                }
                 break;
             default:
                 this.props.updateName('');
@@ -57,17 +120,17 @@ export class ClassSection extends React.Component {
             />
 
             { this.state.classType === ClassTypes.REPO.answer
-            ? 'repo' : ''}
+            ? <FormInput label="The queried data/record type (noun)" onUpdate={this.updateRepoRecord}/> : ''}
             { this.state.classType === ClassTypes.FACTORY.answer
-            ? 'factory' : ''}
+            ? <FormInput label="The created data/record type (noun)" onUpdate={this.updateFactoryRecord}/> : ''}
             { this.state.classType === ClassTypes.FUNCTION.answer
-            ? 'function' : ''}
+            ? <FormInput label="The SMART-Flow using this service" onUpdate={this.updateSmartFlow}/> : ''}
             { this.state.classType === ClassTypes.VALUE_OBJECT.answer
-            ? 'value' : ''}
+            ? <FormInput label="The data/record type being modeled (noun)" onUpdate={this.updateValueRecord}/> : ''}
             { this.state.classType === ClassTypes.ENTITY.answer
-            ? 'entity' : ''}
+            ? <FormInput label="The data/record type being modeled (noun)" onUpdate={this.updateEntityRecord}/> : ''}
             { this.state.classType === ClassTypes.BUSINESS.answer
-            ? 'business' : ''}
+            ? <FormInput label="The area of the business uniting the code (noun)" onUpdate={this.updateBusinessRecord}/> : ''}
          </div>);
     }
 }
