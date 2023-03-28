@@ -84,56 +84,70 @@ export class ClassSection extends React.Component {
         switch (classType) {
             case ClassTypes.REPO.answer:
                 if (repoRecord) {
-                    const jeremyName = {};
+                    const jeremyName = Formatter.combineAllNamePartsForClass([
+                        Formatter.jeremyTruncate(repoRecord), 'repo'
+                    ]);
                     const jonesName = Formatter.combineAllNamePartsForClass([ repoRecord, 'repo' ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.FACTORY.answer:
                 if (factoryRecord) {
-                    const jeremyName = {};
+                    const jeremyName = Formatter.combineAllNamePartsForClass([
+                        Formatter.jeremyTruncate(factoryRecord), 'factory',
+                   ]);
                     const jonesName = Formatter.combineAllNamePartsForClass([ factoryRecord, 'factory' ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.INTERFACE.answer:
                 if (interfaceRecord) {
-                    const jeremyName = {};
+                    const jeremyName = Formatter.combineAllNamePartsForClass([
+                        Formatter.jeremyTruncate(interfaceRecord),
+                   ]);
                     const jonesName = Formatter.combineAllNamePartsForClass([ interfaceRecord ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.FUNCTION.answer:
                 if (smartFlow) {
-                    const jeremyName = {};
                     const jonesName = Formatter.combineAllNamePartsForClass([ smartFlow ]);
+                    const jeremyName = jonesName;
                     this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.ADAPTOR.answer:
                 if (adaptorRecord) {
-                    const jeremyName = {};
+                    const jeremyName = Formatter.combineAllNamePartsForClass([
+                        Formatter.jeremyTruncate(adaptorRecord), 'Service',
+                   ]);
                     const jonesName = Formatter.combineAllNamePartsForClass([ adaptorRecord, 'Service' ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.VALUE_OBJECT.answer:
                 if (valueRecord) {
-                    const jeremyName = {};
+                    const jeremyName = Formatter.combineAllNamePartsForClass([
+                        Formatter.jeremyTruncate(valueRecord),
+                   ]);
                     const jonesName = Formatter.combineAllNamePartsForClass([ valueRecord ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.ENTITY.answer:
                 if (entityRecord) {
-                    const jeremyName = {};
+                    const jeremyName = Formatter.combineAllNamePartsForClass([
+                        Formatter.jeremyTruncate(entityRecord),
+                   ]);
                     const jonesName = Formatter.combineAllNamePartsForClass([ entityRecord ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.BUSINESS.answer:
                 if (buisinessRecord) {
-                    const jeremyName = {};
+                    const jeremyName = Formatter.combineAllNamePartsForClass([
+                        Formatter.jeremyTruncate(buisinessRecord),
+                   ]);
                     const jonesName = Formatter.combineAllNamePartsForClass([ buisinessRecord ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }
