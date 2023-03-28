@@ -12,8 +12,8 @@ const FunctionTypes = {
 };
 
 const Binary = {
-    TRUE: 'Yes',
-    FALSE: 'No',
+    TRUE: { answer: 'Yes' },
+    FALSE: { answer: 'No' },
 }
 export class FunctionSection extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ export class FunctionSection extends React.Component {
     }
 
     onSelectType (selection) {
-        this.props.updateName('');
+        this.props.updateName();
         this.setState({ functionType: selection }, this.buildName);
     }
 
@@ -70,36 +70,67 @@ export class FunctionSection extends React.Component {
         switch (this.state.functionType) {
             case FunctionTypes.COMMAND.answer:
                 if (command && commandRecord) {
-                    const nameParts = [command];
-                    nameParts.push(`${commandRecord}${commandPlural === Binary.TRUE ? 's' : ''}`);
-                    const suggestedName = Formatter.combineAllNameParts(nameParts);
-                    this.props.updateName(suggestedName);
+                    const jeremyNameParts = [Formatter.jeremyTruncate(command)];
+                    const jonesNameParts = [command];
+
+                    jeremyNameParts.push(`${Formatter.jeremyTruncate(commandRecord)}${commandPlural === Binary.TRUE.answer ? 's' : ''}`)
+                    jonesNameParts.push(`${commandRecord}${commandPlural === Binary.TRUE.answer ? 's' : ''}`);
+
+                    const jonesName = Formatter.combineAllNameParts(jonesNameParts);
+                    const jeremyName = Formatter.combineAllNameParts(jeremyNameParts);
+
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case FunctionTypes.QUERY.answer:
                 if (queryRecord) {
-                    const nameParts = [ 'get', queryRecord];
+                    const jonesNameParts = [ 'get', queryRecord];
+                    const jeremyNameParts = [ 'get', Formatter.jeremyTruncate(queryRecord)];
+                    
                     if (query) {
-                        nameParts.push('by');
-                        nameParts.push(`${query}${queryPlural === Binary.TRUE ? 's' : ''}`);
+                        jonesNameParts.push('by');
+                        jonesNameParts.push(`${query}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
+                        jeremyNameParts.push('by');
+                        jeremyNameParts.push(`${Formatter.jeremyTruncate(query)}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
                     }
-                    const suggestedName = Formatter.combineAllNameParts(nameParts);
-                    this.props.updateName(suggestedName);
+                    
+                    const jonesName = Formatter.combineAllNameParts(jonesNameParts);
+                    const jeremyName = Formatter.combineAllNameParts(jeremyNameParts);
+
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case FunctionTypes.BOTH.answer:
                 if (command && commandRecord && queryRecord) {
-                    const nameParts = [ command, commandRecord, 'and', 'get', queryRecord]
+                    const jonesNameParts = [command];
+                    const jeremyNameParts = [Formatter.jeremyTruncate(command)]
+
+                    jeremyNameParts.push(`${Formatter.jeremyTruncate(commandRecord)}${commandPlural === Binary.TRUE.answer ? 's' : ''}`)
+                    jonesNameParts.push(`${commandRecord}${commandPlural === Binary.TRUE.answer ? 's' : ''}`);
+                    
+                    jonesNameParts.push('and');
+                    jeremyNameParts.push('and');
+
+                    jonesNameParts.push('get');
+                    jeremyNameParts.push('get');
+
+                    jonesNameParts.push(queryRecord);
+                    jeremyNameParts.push(Formatter.jeremyTruncate(queryRecord));
+
                     if (query) {
-                        nameParts.push('by');
-                        nameParts.push(`${query}${queryPlural === Binary.TRUE ? 's' : ''}`);
+                        jonesNameParts.push('by');
+                        jonesNameParts.push(`${query}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
+                        jeremyNameParts.push('by');
+                        jeremyNameParts.push(`${Formatter.jeremyTruncate(query)}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
                     }
-                    const suggestedName = Formatter.combineAllNameParts(nameParts);
-                    this.props.updateName(suggestedName);
+                    
+                    const jonesName = Formatter.combineAllNameParts(jonesNameParts);
+                    const jeremyName = Formatter.combineAllNameParts(jeremyNameParts);;
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             default:
-                this.props.updateName('');
+                this.props.updateName();
                 break;
         }
     }

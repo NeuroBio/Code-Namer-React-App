@@ -16,12 +16,15 @@ export class ArraySection extends React.Component {
     }
 
     buildName () {
-        const { record } = this.state.record;
+        const { record } = this.state;
         if (record) {
-            const suggestedName = Formatter.combineAllNameParts([ `${record}s`]);
-            this.props.updateName(suggestedName);
+            const jeremyName = Formatter.combineAllNameParts([
+                Formatter.jeremyTruncate(`${record}s`),
+            ]);
+            const jonesName = Formatter.combineAllNameParts([ `${record}s`]);
+            this.props.updateName({ jonesName, jeremyName });
         } else{
-            this.props.updateName('');
+            this.props.updateName();
         }
     }
 

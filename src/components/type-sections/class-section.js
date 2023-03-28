@@ -33,7 +33,7 @@ export class ClassSection extends React.Component {
     }
 
     onSelectType (selection) {
-        this.props.updateName('');
+        this.props.updateName();
         this.setState({ classType: selection }, this.buildName);
     }
 
@@ -84,54 +84,62 @@ export class ClassSection extends React.Component {
         switch (classType) {
             case ClassTypes.REPO.answer:
                 if (repoRecord) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ repoRecord, 'repo' ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ repoRecord, 'repo' ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.FACTORY.answer:
                 if (factoryRecord) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ factoryRecord, 'factory' ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ factoryRecord, 'factory' ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.INTERFACE.answer:
                 if (interfaceRecord) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ interfaceRecord ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ interfaceRecord ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.FUNCTION.answer:
                 if (smartFlow) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ smartFlow ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ smartFlow ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.ADAPTOR.answer:
                 if (adaptorRecord) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ adaptorRecord, 'Service' ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ adaptorRecord, 'Service' ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.VALUE_OBJECT.answer:
                 if (valueRecord) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ valueRecord ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ valueRecord ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.ENTITY.answer:
                 if (entityRecord) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ entityRecord ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ entityRecord ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ClassTypes.BUSINESS.answer:
                 if (buisinessRecord) {
-                    const suggestedName = Formatter.combineAllNamePartsForClass([ buisinessRecord ]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = {};
+                    const jonesName = Formatter.combineAllNamePartsForClass([ buisinessRecord ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             default:
-                this.props.updateName('');
+                this.props.updateName();
                 break;
         }
     };

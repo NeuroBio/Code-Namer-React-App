@@ -10,19 +10,27 @@ const SupportedTypes = {
     FUNCTION: { answer: 'Function' },
     CLASS: { answer: 'Class' },
     OBJECT: { answer: 'Object' },
-    ARRAY: { answer: 'Array' }
+    ARRAY: { answer: 'Array' },
 };
+
+const ReviewerTypes = {
+    JONES: { answer: 'Jones', help: 'verbose = true'},
+    JEREMY: { answer: 'Jeremy', help: 'verbose = false'},
+    BOTH: { answer: 'Both', help: 'verbose = trufalse'},
+}
 
 export class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            suggestedName: '',
+            jeremyName: '',
+            jonesName: '',
             codeType: '',
         }
 
         this.updateName = this.updateName.bind(this);
         this.onSelectCodeType = this.onSelectCodeType.bind(this);
+        this.onSelectReviewerType = this.onSelectReviewerType.bind(this);
     }
 
 
@@ -30,8 +38,13 @@ export class Form extends React.Component {
         this.setState({ codeType: selection }, this.updateName);
     }
 
+    onSelectReviewerType (selection) {
+        this.setState({ reviewerType: selection }, this.updateName);
+    }
+
     updateName (input) {
-        this.setState({ suggestedName: input || '' });
+        this.setState({ jonesName: input?.jonesName || '' });
+        this.setState({ jeremyName: input?.jeremyName || '' });
     }
 
     submitHandler(e) {
@@ -62,9 +75,15 @@ export class Form extends React.Component {
             <section className="main-form-inputs">
                 <FormRadioSet
                     question="Your code chunk is a:"
-                    identifier="main-question"
+                    identifier="code-chunk-type"
                     answers={Object.values(SupportedTypes)}
                     onSelection={this.onSelectCodeType}
+                />
+                <FormRadioSet
+                    question="Revewier Mode:"
+                    identifier="reviewer"
+                    answers={Object.values(ReviewerTypes)}
+                    onSelection={this.onSelectReviewerType}
                 />
             </section>
             <section className="section-form-inputs">
@@ -91,7 +110,11 @@ export class Form extends React.Component {
                 <label id="result-label" htmlFor="result">Suggested Name: </label>
                 <br />
                 <span id="result">
-                    { this.state.suggestedName}
+                    Jones: { this.state.jonesName}
+                </span>
+                <br />
+                <span id="result">
+                    Jeremy: { this.state.jeremyName}
                 </span>
             </p>
             <hr />

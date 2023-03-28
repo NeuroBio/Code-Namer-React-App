@@ -29,7 +29,7 @@ export class ObjectSection extends React.Component {
     }
 
     onSelectType (selection) {
-        this.props.updateName('');
+        this.props.updateName();
         this.setState({ objectType: selection }, this.buildName);
     }
 
@@ -46,7 +46,7 @@ export class ObjectSection extends React.Component {
     }
 
     updatePasta(pasta) {
-        this.props.updateName(pasta);
+        this.props.updateName({});
     }
 
     buildName () {
@@ -59,22 +59,30 @@ export class ObjectSection extends React.Component {
         switch (objectType) {
             case ObjectTypes.INSTANCE.answer:
                 if (instanceRecord) {
-                    const suggestedName = Formatter.combineAllNameParts([instanceRecord]);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = Formatter.combineAllNameParts([
+                        Formatter.jeremyTruncate(instanceRecord)
+                    ]);
+                    const jonesName = Formatter.combineAllNameParts([instanceRecord]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ObjectTypes.KEYED_LIST.answer:
                 if (valueRecord && keyProperty) {
-                    const nameParts = [`${valueRecord}s`, 'keyed', 'by', keyProperty];
-                    const suggestedName = Formatter.combineAllNameParts(nameParts);
-                    this.props.updateName(suggestedName);
+                    const jeremyName = Formatter.combineAllNameParts([
+                        `${ Formatter.jeremyTruncate(valueRecord)}s`, 'keyed', 'by', keyProperty
+                    ]);;
+                    const jonesName = Formatter.combineAllNameParts([
+                        `${valueRecord}s`, 'keyed', 'by', keyProperty
+                    ]);
+                    this.props.updateName({ jonesName, jeremyName });
                 }
                 break;
             case ObjectTypes.OTHER.answer:
                 this.updatePasta(PastaChef.bakePasta());
                 break;
             default:
-                this.props.updateName('');
+                console.log('ffs')
+                this.props.updateName();
                 break;
         }
     }

@@ -21,6 +21,7 @@
 
 .main-form-inputs {
     margin-left: 2em;
+    display: flex;
  }
 
 .section-form-inputs {

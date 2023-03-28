@@ -15,7 +15,11 @@ export class Formatter {
             formatted += this.toPascalCase(variable);
         });
         return formatted;
-     }
+    }
+
+    static jeremyTruncate (input) {
+        return input.split(' ')[0];
+    }
 
     static toCamelCase (input) {
         return input
