@@ -19,6 +19,8 @@ export class ArraySection extends React.Component {
         if (this.state.record) {
             const suggestedName = Formatter.combineAllNameParts([ `${this.state.record}s`]);
             this.props.updateName(suggestedName);
+        } else{
+            this.props.updateName('');
         }
     }
 

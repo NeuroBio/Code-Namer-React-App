@@ -29,6 +29,7 @@ export class ObjectSection extends React.Component {
     }
 
     onSelectType (selection) {
+        this.props.updateName('');
         this.setState({ objectType: selection }, this.buildName);
     }
 
@@ -73,6 +74,7 @@ export class ObjectSection extends React.Component {
                 this.updatePasta(PastaChef.bakePasta());
                 break;
             default:
+                this.props.updateName('');
                 break;
         }
     }

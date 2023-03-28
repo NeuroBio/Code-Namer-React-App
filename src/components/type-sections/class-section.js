@@ -17,12 +17,35 @@ export class ClassSection extends React.Component {
 
         this.onSelectType = this.onSelectType.bind(this);
 
-
+        this.buildName = this.buildName.bind(this);
     }
 
     onSelectType (selection) {
+        this.props.updateName('');
         this.setState({ classType: selection }, this.buildName);
     }
+
+    buildName () {
+        const {
+        } = this.state;
+        switch (this.state.classType) {
+            case ClassTypes.REPO:
+                break;
+            case ClassTypes.FACTORY:
+                break;
+            case ClassTypes.FUNCTION:
+                break;
+            case ClassTypes.VALUE_OBJECT:
+                break;
+            case ClassTypes.ENTITY:
+                break;
+            case ClassTypes.BUSINESS:
+                break;
+            default:
+                this.props.updateName('');
+                break;
+        }
+    };
 
     render() {
         return (<div>
@@ -34,17 +57,17 @@ export class ClassSection extends React.Component {
             />
 
             { this.state.classType === ClassTypes.REPO.answer
-            ? <></> : ''}
+            ? 'repo' : ''}
             { this.state.classType === ClassTypes.FACTORY.answer
-            ? <></> : ''}
+            ? 'factory' : ''}
             { this.state.classType === ClassTypes.FUNCTION.answer
-            ? <></> : ''}
+            ? 'function' : ''}
             { this.state.classType === ClassTypes.VALUE_OBJECT.answer
-            ? <></> : ''}
+            ? 'value' : ''}
             { this.state.classType === ClassTypes.ENTITY.answer
-            ? <></> : ''}
+            ? 'entity' : ''}
             { this.state.classType === ClassTypes.BUSINESS.answer
-            ? <></> : ''}
+            ? 'business' : ''}
          </div>);
     }
 }

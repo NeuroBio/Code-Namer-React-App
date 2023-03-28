@@ -34,6 +34,7 @@ export class FunctionSection extends React.Component {
     }
 
     onSelectType (selection) {
+        this.props.updateName('');
         this.setState({ functionType: selection }, this.buildName);
     }
 
@@ -98,6 +99,7 @@ export class FunctionSection extends React.Component {
                 }
                 break;
             default:
+                this.props.updateName('');
                 break;
         }
     }

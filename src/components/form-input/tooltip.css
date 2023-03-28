@@ -2,8 +2,8 @@
 /* https://paladini.dev/posts/how-to-make-an-extremely-reusable-tooltip-component-with-react--and-nothing-else/ */
 /* Custom properties */
 :root {
-    --tooltip-text-color: white;
-    --tooltip-background-color: black;
+    --tooltip-text-color: whitesmoke;
+    --tooltip-background-color: #171c24;
     --tooltip-margin: 0.75em;
     --tooltip-arrow-size: 6px;
   }
