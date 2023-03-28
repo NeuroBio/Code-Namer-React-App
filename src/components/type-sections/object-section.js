@@ -41,12 +41,12 @@ export class ObjectSection extends React.Component {
         this.setState({ valueRecord: input }, this.buildName);
     }
 
-    updateKeyProperty (input) {
-        this.setState({ keyProperty: input }, this.buildName);
+    updatePasta(input) {
+        this.props.updateName({ jonesName: input[0], jeremyName: input[1] });
     }
 
-    updatePasta(pasta) {
-        this.props.updateName({});
+    updateKeyProperty (input) {
+        this.setState({ keyProperty: input }, this.buildName);
     }
 
     buildName () {
@@ -79,9 +79,13 @@ export class ObjectSection extends React.Component {
                 break;
             case ObjectTypes.OTHER.answer:
                 this.updatePasta(PastaChef.bakePasta());
+
+                this.updatePasta({
+                    jonesName: PastaChef.bakePasta(),
+                    jeremyName: PastaChef.bakePasta(),
+                });
                 break;
             default:
-                console.log('ffs')
                 this.props.updateName();
                 break;
         }
@@ -100,6 +104,7 @@ export class ObjectSection extends React.Component {
             ? <PastaShop
                 shopName="Consider making a class instead of making code pasta..."
                 updatePasta={this.updatePasta}
+                howMany="2"
             /> : ''}
             { this.state.objectType === ObjectTypes.INSTANCE.answer
             ?  <FormInput label="The data/record type (noun)" onUpdate={this.updateInstanceRecord}/>

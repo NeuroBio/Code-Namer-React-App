@@ -16,7 +16,11 @@ export class PastaShop extends React.Component {
     }
 
     onPastaRefresh() {
-        this.props.updatePasta(PastaChef.bakePasta());
+        const pasta = [];
+        for (let i = 0; i < this.props.howMany; i++) {
+            pasta.push(PastaChef.bakePasta());
+        }
+        this.props.updatePasta(pasta);
         this.limitPasta();
     }
 
