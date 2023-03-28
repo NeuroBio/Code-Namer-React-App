@@ -39,10 +39,11 @@ export class Form extends React.Component {
     }
 
     onSelectReviewerType (selection) {
-        this.setState({ reviewerType: selection }, this.updateName);
+        this.setState({ reviewerType: selection });
     }
 
     updateName (input) {
+        console.log('trigger')
         this.setState({ jonesName: input?.jonesName || '' });
         this.setState({ jeremyName: input?.jeremyName || '' });
     }

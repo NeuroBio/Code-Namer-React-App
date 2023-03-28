@@ -78,12 +78,11 @@ export class ObjectSection extends React.Component {
                 }
                 break;
             case ObjectTypes.OTHER.answer:
-                this.updatePasta(PastaChef.bakePasta());
-
-                this.updatePasta({
-                    jonesName: PastaChef.bakePasta(),
-                    jeremyName: PastaChef.bakePasta(),
-                });
+                console.log('here')
+                this.updatePasta([
+                    PastaChef.bakePasta(),
+                    PastaChef.bakePasta(),
+                ]);
                 break;
             default:
                 this.props.updateName();
