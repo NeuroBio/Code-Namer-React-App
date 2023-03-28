@@ -12,7 +12,6 @@ export class ToolTip extends React.Component {
 
         this.showTip = this.showTip.bind(this);
         this.hideTip = this.hideTip.bind(this);
-        console.log(this.props)
     }
   
     showTip () {

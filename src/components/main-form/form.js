@@ -31,7 +31,6 @@ export class Form extends React.Component {
     }
 
     updateName (input) {
-        console.log(input)
         this.setState({ suggestedName: input || '' });
     }
 

@@ -88,7 +88,7 @@ export class ObjectSection extends React.Component {
 
             { this.state.objectType === ObjectTypes.OTHER.answer
             ? <PastaShop
-                shopName="Consider making a class instead..."
+                shopName="Consider making a class instead of making code pasta..."
                 updatePasta={this.updatePasta}
             /> : ''}
             { this.state.objectType === ObjectTypes.INSTANCE.answer
