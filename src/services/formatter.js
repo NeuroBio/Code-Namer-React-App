@@ -47,4 +47,16 @@ export class Formatter {
             })
             .join('');
     }
+
+    static toPlural (input) {
+        const parts = input.split(' ')
+        let lastWord = parts[-1] 
+        if (lastWord.match(/(ch|s|z|x)$/)) {
+            lastWord = `${lastWord}es`;
+        } else if (lastWord.match(/[^aeiou](y)$/)) {
+            lastWord = lastWord.replace('y', 'ies');
+        } else {
+            lastWord = `${lastWord}s`;
+        }
+    }
 }
