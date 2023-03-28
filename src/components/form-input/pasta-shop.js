@@ -41,12 +41,14 @@ export class PastaShop extends React.Component {
 
     render() {
         return (<article>
-            <dialog open={this.state.tooMuchPasta}>
+            <dialog className="dialog" open={this.state.tooMuchPasta}>
                 <p>
                     THE CHEF CAN ONLY MAKE SO MUCH PASTA OKAY!!??
                 </p>
-                <button type="button" onClick={this.onCloseClick}>Okay :(</button>
-                <button type="a-massive-lie">NOT OKAY >:(</button>
+                <div className="button-box">
+                    <button className="basic-button" type="button" onClick={this.onCloseClick}>Okay :(</button>
+                    <button className="angry-button" type="a-massive-lie">NOT OKAY &gt;:(</button>
+                </div>
             </dialog>
 
            <p>{this.props.shopName}</p>
