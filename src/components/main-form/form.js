@@ -106,17 +106,17 @@ export class Form extends React.Component {
             </section>
 
             {/* result */}
-            <p id="form-results">
+            <section id="form-results">
                 <label id="result-label" htmlFor="result">Suggested Name: </label>
-                <br />
-                <span id="result">
-                    Jones: { this.state.jonesName}
-                </span>
-                <br />
-                <span id="result">
-                    Jeremy: { this.state.jeremyName}
-                </span>
-            </p>
+                { this.state.reviewerType === ReviewerTypes.JONES.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
+                    ? <p> Jones:
+                        <span id="result">{ this.state.jonesName}</span>
+                    </p> : ''}
+                { this.state.reviewerType === ReviewerTypes.JEREMY.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
+                    ? <p> Jeremy: 
+                        <span id="result">{ this.state.jeremyName}</span>
+                    </p> : ''}
+            </section>
             <hr />
             <br />
         </form>);
