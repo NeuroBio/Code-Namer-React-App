@@ -27,8 +27,9 @@ export class FunctionSection extends React.Component {
         this.onSelectCommandPlural = this.onSelectCommandPlural.bind(this);
 
         this.updateQueryRecord = this.updateQueryRecord.bind(this);
+        this.onSelectQueryRecordPlural = this.onSelectQueryRecordPlural.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
-        this.onSelectQueryPlural = this.onSelectQueryPlural.bind(this);
+        this.onSelectQueryPropertyPlural = this.onSelectQueryPropertyPlural.bind(this);
 
         this.buildName = this.buildName.bind(this);
     }
@@ -51,11 +52,14 @@ export class FunctionSection extends React.Component {
     updateQueryRecord(input) {
         this.setState({ queryRecord: input }, this.buildName);
     }
+    onSelectQueryRecordPlural(selection) {
+        this.setState({ queryRecordPlural: selection }, this.buildName);
+    }
     updateQuery (input) {
         this.setState({ query: input }, this.buildName);
     }
-    onSelectQueryPlural (selection) {
-        this.setState({ queryPlural: selection }, this.buildName);
+    onSelectQueryPropertyPlural (selection) {
+        this.setState({ queryPropertyPlural: selection }, this.buildName);
     }
 
     buildName () {
@@ -65,7 +69,8 @@ export class FunctionSection extends React.Component {
             commandPlural,
             query,
             queryRecord,
-            queryPlural,
+            queryRecordPlural,
+            queryPropertyPlural,
         } = this.state;
         switch (this.state.functionType) {
             case FunctionTypes.COMMAND.answer:
@@ -88,18 +93,25 @@ export class FunctionSection extends React.Component {
                 break;
             case FunctionTypes.QUERY.answer:
                 if (queryRecord) {
-                    const jonesNameParts = [ 'get', queryRecord];
-                    const jeremyNameParts = [ 'get', Formatter.jeremyTruncate(queryRecord)];
+                    const jonesNameParts = [ 'get' ];
+                    const jeremyNameParts = [ 'get' ];
                     
+                    jeremyNameParts.push(queryRecordPlural === Binary.TRUE.answer
+                        ? Formatter.toPlural(Formatter.jeremyTruncate(queryRecord))
+                        : Formatter.jeremyTruncate(queryRecord))
+                    jonesNameParts.push(queryRecordPlural === Binary.TRUE.answer
+                        ? Formatter.toPlural(queryRecord)
+                        : queryRecord);
+
                     if (query) {
                         jonesNameParts.push('by');
-                        // jonesNameParts.push(`${query}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
+                        // jonesNameParts.push(`${query}${queryPropertyPlural === Binary.TRUE.answer ? 's' : ''}`);
                         jeremyNameParts.push('by');
-                        // jeremyNameParts.push(`${Formatter.jeremyTruncate(query)}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
-                        jeremyNameParts.push(queryPlural === Binary.TRUE.answer
+                        // jeremyNameParts.push(`${Formatter.jeremyTruncate(query)}${queryPropertyPlural === Binary.TRUE.answer ? 's' : ''}`);
+                        jeremyNameParts.push(queryPropertyPlural === Binary.TRUE.answer
                             ? Formatter.toPlural(Formatter.jeremyTruncate(query))
                             : Formatter.jeremyTruncate(query))
-                        jonesNameParts.push(queryPlural === Binary.TRUE.answer
+                        jonesNameParts.push(queryPropertyPlural === Binary.TRUE.answer
                             ? Formatter.toPlural(query)
                             : query);
                     }
@@ -135,10 +147,10 @@ export class FunctionSection extends React.Component {
                         jonesNameParts.push('by');
                         jeremyNameParts.push('by');
 
-                        jeremyNameParts.push(queryPlural === Binary.TRUE.answer
+                        jeremyNameParts.push(queryPropertyPlural === Binary.TRUE.answer
                             ? Formatter.toPlural(Formatter.jeremyTruncate(query))
                             : Formatter.jeremyTruncate(query))
-                        jonesNameParts.push(queryPlural === Binary.TRUE.answer
+                        jonesNameParts.push(queryPropertyPlural === Binary.TRUE.answer
                             ? Formatter.toPlural(query)
                             : query);
                     }
@@ -180,12 +192,18 @@ export class FunctionSection extends React.Component {
             ? <fieldset className="form-set">
                 <legend>Query Settings</legend>
                 <FormInput label="The query data/record type (noun)" onUpdate={this.updateQueryRecord}/>
+                <FormRadioSet
+                    question="Can it return multiple data/records?"
+                    identifier="plural-query-record"
+                    answers={Object.values(Binary)}
+                    onSelection={this.onSelectQueryRecordPlural}
+                />
                 <FormInput label="If not fetching instances of the data/record type, what property are they chosen by?" onUpdate={this.updateQuery}/>
                 <FormRadioSet
                     question="Is the property an array or single value?"
-                    identifier="plural-query"
+                    identifier="plural-query-property"
                     answers={Object.values(Binary)}
-                    onSelection={this.onSelectQueryPlural}
+                    onSelection={this.onSelectQueryPropertyPlural}
                 />
             </fieldset>
             : '' }
