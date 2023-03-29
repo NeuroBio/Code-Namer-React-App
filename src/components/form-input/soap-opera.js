@@ -8,21 +8,29 @@ export class SoapOpera extends React.Component {
     constructor(props) {
         super(props);
 
-        this.startProgram = this.startProgram.bind(this);
+        this.changeScene = this.changeScene.bind(this);
 
         this.state = {
             Scenes: [
                 {
                   name: Scenes.BEGIN,
-                  message: 'test',
-                  buttons: [],  
+                  message: 'I can’t believe you would disrespect me in public like this. Sometimes I feel like you’re not really serious about the principles of domain driven design… You do care, don’t you?',
+                  buttons: [
+                    {
+                        text: 'Of course, darling!  But this function has to be a command query.',
+                        onClick: () => {}
+                    }, {
+                        text: 'lol no',
+                        onClick: () => {},
+                    },
+                  ],  
                 }                
             ],
         }
     }
 
-    startProgram () {
-
+    changeScene (input) {
+        this.setState({ currentScene: input })
     }
 
     render () {
@@ -40,7 +48,7 @@ export class SoapOpera extends React.Component {
            <button
                 type="button"
                 className="basic-button"
-                onClick={this.startProgram}>
+                onClick={() => this.changeScene(Scenes.BEGIN)}>
                     SHAME THE REPO ANYWAY
             </button>
         </div>);

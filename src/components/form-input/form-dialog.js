@@ -18,7 +18,7 @@ export class FormDialog extends React.Component {
                     { this.props.buttons.map((button, index) => {
                         return <button
                             key={index}
-                            className={button.class}
+                            className={button.class || 'basic-button'}
                             type="button"
                             onClick={button.onClick}>
                                 {button.text}

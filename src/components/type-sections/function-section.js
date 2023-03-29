@@ -244,7 +244,7 @@ export class FunctionSection extends React.Component {
                      />
                 }
                 {   this.unacceptable()
-                ? <div class="side-by-side">
+                ? <div className="side-by-side">
                     <p>
                         Why would you do this to the Repo?<br />
                         You bring <b>shame</b> to the proud Repo.<br />
