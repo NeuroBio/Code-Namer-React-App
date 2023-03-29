@@ -2,17 +2,24 @@ import React from 'react';
 import './form-input.css';
 import { IoMdRefresh } from 'react-icons/io';
 import { PastaChef } from '../../services/pasta-chef';
+import { FormDialog } from './form-dialog';
 
 let timeout;
 export class PastaShop extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            orderCount : 0,
-        };
+
         this.onPastaRefresh = this.onPastaRefresh.bind(this);
         this.limitPasta = this.limitPasta.bind(this);
         this.onCloseClick = this.onCloseClick.bind(this);
+
+        this.state = {
+            orderCount: 0,
+            DialogButtons: [
+                { class: "basic-button", onClick: this.onCloseClick, text: 'Okay :(' },
+                { class: "angry-button", text: 'NOT OKAY >:(' },
+            ]
+        };
     }
 
     onPastaRefresh() {
@@ -45,15 +52,11 @@ export class PastaShop extends React.Component {
 
     render() {
         return (<article>
-            <dialog className="dialog" open={this.state.tooMuchPasta}>
-                <p>
-                    THE CHEF CAN ONLY MAKE SO MUCH PASTA OKAY!!??
-                </p>
-                <div className="button-box">
-                    <button className="basic-button" type="button" onClick={this.onCloseClick}>Okay :(</button>
-                    <button className="angry-button" type="a-massive-lie">NOT OKAY &gt;:(</button>
-                </div>
-            </dialog>
+            <FormDialog
+                open={this.state.tooMuchPasta}
+                message="THE CHEF CAN ONLY MAKE SO MUCH PASTA OKAY!!??"
+                buttons={this.state.DialogButtons}
+            />
 
            <p>{this.props.shopName}</p>
            <button
