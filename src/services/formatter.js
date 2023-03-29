@@ -18,7 +18,7 @@ export class Formatter {
     }
 
     static jeremyTruncate (input) {
-        return input.split(' ')[0];
+        return input.split(' ').pop();
     }
 
     static toCamelCase (input) {
