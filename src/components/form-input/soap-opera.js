@@ -25,9 +25,10 @@ export class SoapOpera extends React.Component {
                 onClick: () => this.changeScene(Scenes.BEGIN),
             }, {
                 text: 'Okay, I’ve learned my lesson.  Now, get me out of this mad house!',
-                onClick: () => {},
+                onClick: () => this.changeScene(),
             },
-          ]
+        ];
+
         this.state = {
             Scenes: [
                 {
