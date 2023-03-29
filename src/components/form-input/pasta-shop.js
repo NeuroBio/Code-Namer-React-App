@@ -5,6 +5,15 @@ import { PastaChef } from '../../services/pasta-chef';
 import { FormDialog } from './form-dialog';
 
 let timeout;
+const MessagesFromTheChef = {
+    0: 'THE CHEF CAN ONLY MAKE SO MUCH PASTA OKAY!!??',
+    1: 'The chef does not care.',
+    5: 'The chef continues not to care.',
+    10: 'Your discontented actions remain futile.',
+    25: '',
+    40: 'Oh... Are you still here?',
+    70: 'Are you aware that you clicked that button at least 70 times?  Are you also aware that the most addictive schedule for positive reinforcement is "variable ratio," where a reward is given after a changing number of responses.  If I say this is the last message, will you believe me, or will you keep clicking, believing that I am lying and there is a further reward at a higher click increment?  The experiment begins.'
+}
 export class PastaShop extends React.Component {
     constructor(props) {
         super(props);
@@ -12,13 +21,16 @@ export class PastaShop extends React.Component {
         this.onPastaRefresh = this.onPastaRefresh.bind(this);
         this.limitPasta = this.limitPasta.bind(this);
         this.onCloseClick = this.onCloseClick.bind(this);
+        this.onDesparation = this.onDesparation.bind(this);
+        this.chefMessage = this.chefMessage.bind(this);
 
         this.state = {
             orderCount: 0,
+            messageClicks: 0,
             DialogButtons: [
-                { class: "basic-button", onClick: this.onCloseClick, text: 'Okay :(' },
-                { class: "angry-button", text: 'NOT OKAY >:(' },
-            ]
+                { text: 'Okay :(', onClick: this.onCloseClick },
+                { text: 'NOT OKAY >:(', onClick: this.onDesparation, class: "angry-button" },
+            ],
         };
     }
 
@@ -46,15 +58,40 @@ export class PastaShop extends React.Component {
         }
     };
 
-    onCloseClick() {
-        this.setState({ tooMuchPasta: false });
+    onCloseClick () {
+        this.setState({
+            tooMuchPasta: false,
+            messageClicks: 0,
+        });
+    }
+
+    onDesparation () {
+        let messageClicks = this.state.messageClicks
+        messageClicks += 1;
+        this.setState({ messageClicks });
+    }
+
+    chefMessage() {
+        const messageClicks = this.state.messageClicks
+        const intervals = Object.keys(MessagesFromTheChef);
+        let key;
+        for (const interval of intervals) {
+            if (interval <= messageClicks) {
+                key = interval;
+            } else {
+                break;
+            }
+        }
+
+        
+        return MessagesFromTheChef[key];
     }
 
     render() {
         return (<article>
             <FormDialog
                 open={this.state.tooMuchPasta}
-                message="THE CHEF CAN ONLY MAKE SO MUCH PASTA OKAY!!??"
+                message={this.chefMessage()}
                 buttons={this.state.DialogButtons}
             />
 
