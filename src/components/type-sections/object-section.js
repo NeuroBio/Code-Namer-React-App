@@ -69,10 +69,12 @@ export class ObjectSection extends React.Component {
             case ObjectTypes.KEYED_LIST.answer:
                 if (valueRecord && keyProperty) {
                     const jeremyName = Formatter.combineAllNameParts([
-                        `${ Formatter.jeremyTruncate(valueRecord)}s`, 'by', keyProperty
+                        Formatter.toPlural(Formatter.jeremyTruncate(valueRecord)),
+                        'by',
+                        keyProperty
                     ]);;
                     const jonesName = Formatter.combineAllNameParts([
-                        `${valueRecord}s`, 'keyed', 'by', keyProperty
+                        Formatter.toPlural(valueRecord), 'keyed', 'by', keyProperty
                     ]);
                     this.props.updateName({ jonesName, jeremyName });
                 }

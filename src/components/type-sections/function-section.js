@@ -73,8 +73,12 @@ export class FunctionSection extends React.Component {
                     const jeremyNameParts = [Formatter.jeremyTruncate(command)];
                     const jonesNameParts = [command];
 
-                    jeremyNameParts.push(`${Formatter.jeremyTruncate(commandRecord)}${commandPlural === Binary.TRUE.answer ? 's' : ''}`)
-                    jonesNameParts.push(`${commandRecord}${commandPlural === Binary.TRUE.answer ? 's' : ''}`);
+                    jeremyNameParts.push(commandPlural === Binary.TRUE.answer
+                        ? Formatter.toPlural(Formatter.jeremyTruncate(commandRecord))
+                        : Formatter.jeremyTruncate(commandRecord))
+                    jonesNameParts.push(commandPlural === Binary.TRUE.answer
+                        ? Formatter.toPlural(commandRecord)
+                        : commandRecord);
 
                     const jonesName = Formatter.combineAllNameParts(jonesNameParts);
                     const jeremyName = Formatter.combineAllNameParts(jeremyNameParts);
@@ -89,9 +93,15 @@ export class FunctionSection extends React.Component {
                     
                     if (query) {
                         jonesNameParts.push('by');
-                        jonesNameParts.push(`${query}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
+                        // jonesNameParts.push(`${query}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
                         jeremyNameParts.push('by');
-                        jeremyNameParts.push(`${Formatter.jeremyTruncate(query)}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
+                        // jeremyNameParts.push(`${Formatter.jeremyTruncate(query)}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
+                        jeremyNameParts.push(queryPlural === Binary.TRUE.answer
+                            ? Formatter.toPlural(Formatter.jeremyTruncate(query))
+                            : Formatter.jeremyTruncate(query))
+                        jonesNameParts.push(queryPlural === Binary.TRUE.answer
+                            ? Formatter.toPlural(query)
+                            : query);
                     }
                     
                     const jonesName = Formatter.combineAllNameParts(jonesNameParts);
@@ -105,8 +115,12 @@ export class FunctionSection extends React.Component {
                     const jonesNameParts = [command];
                     const jeremyNameParts = [Formatter.jeremyTruncate(command)]
 
-                    jeremyNameParts.push(`${Formatter.jeremyTruncate(commandRecord)}${commandPlural === Binary.TRUE.answer ? 's' : ''}`)
-                    jonesNameParts.push(`${commandRecord}${commandPlural === Binary.TRUE.answer ? 's' : ''}`);
+                    jeremyNameParts.push(commandPlural === Binary.TRUE.answer
+                        ? Formatter.toPlural(Formatter.jeremyTruncate(commandRecord))
+                        : Formatter.jeremyTruncate(commandRecord))
+                    jonesNameParts.push(commandPlural === Binary.TRUE.answer
+                        ? Formatter.toPlural(commandRecord)
+                        : commandRecord);
                     
                     jonesNameParts.push('and');
                     jeremyNameParts.push('and');
@@ -119,9 +133,14 @@ export class FunctionSection extends React.Component {
 
                     if (query) {
                         jonesNameParts.push('by');
-                        jonesNameParts.push(`${query}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
                         jeremyNameParts.push('by');
-                        jeremyNameParts.push(`${Formatter.jeremyTruncate(query)}${queryPlural === Binary.TRUE.answer ? 's' : ''}`);
+
+                        jeremyNameParts.push(queryPlural === Binary.TRUE.answer
+                            ? Formatter.toPlural(Formatter.jeremyTruncate(query))
+                            : Formatter.jeremyTruncate(query))
+                        jonesNameParts.push(queryPlural === Binary.TRUE.answer
+                            ? Formatter.toPlural(query)
+                            : query);
                     }
                     
                     const jonesName = Formatter.combineAllNameParts(jonesNameParts);

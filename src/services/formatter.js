@@ -50,7 +50,7 @@ export class Formatter {
 
     static toPlural (input) {
         const parts = input.split(' ')
-        let lastWord = parts[-1] 
+        let lastWord = parts.pop()
         if (lastWord.match(/(ch|s|z|x)$/)) {
             lastWord = `${lastWord}es`;
         } else if (lastWord.match(/[^aeiou](y)$/)) {
@@ -58,5 +58,7 @@ export class Formatter {
         } else {
             lastWord = `${lastWord}s`;
         }
+        parts.push(lastWord);
+        return parts.join(' ');
     }
 }

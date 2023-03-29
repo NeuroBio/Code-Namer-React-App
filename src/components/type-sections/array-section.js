@@ -19,9 +19,9 @@ export class ArraySection extends React.Component {
         const { record } = this.state;
         if (record) {
             const jeremyName = Formatter.combineAllNameParts([
-                Formatter.jeremyTruncate(`${record}s`),
+                Formatter.toPlural(Formatter.jeremyTruncate(record)),
             ]);
-            const jonesName = Formatter.combineAllNameParts([ `${record}s`]);
+            const jonesName = Formatter.combineAllNameParts([ Formatter.toPlural(record) ]);
             this.props.updateName({ jonesName, jeremyName });
         } else{
             this.props.updateName();
