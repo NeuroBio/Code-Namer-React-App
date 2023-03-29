@@ -91,12 +91,30 @@ export class Form extends React.Component {
             </section>
             { this.state.reviewerType === ReviewerTypes.BEN.answer
                 ? <section className="section-form-inputs">
-                    <div className="code-like">
+                    <div className="code-like contain">
                         <code>
                             {`codeHelper (helpMe) {`}<br />
-                            <span className="tab">
-                            {`_getHelp(helpMe)`}<br />
-                            </span>
+                            <div className="tab">
+                                {`_getHelp(helpMe);`}<br /><br />
+
+                                {`function _getHelp (pleaseHelpMe) {`}<br />
+                                <div className="tab">
+                                    {`_requestHelp(pleaseHelpMe);`}<br /><br />
+
+                                    {`function _requestHelp(forRealHelpMe) {`}<br />
+                                    <div className="tab">
+                                        {`_findHelp(forRealhelpMe);`}<br /><br />
+
+                                        {`function _findHelp(whyWontYouHelpMe) {`}<br />
+                                            <div className="tab">
+                                                {`return 'Can't help name; too busy de-helpering code';`}<br />
+                                            </div>
+                                        {`}`}<br />
+                                    </div>
+                                    {`}`}<br />
+                                </div>
+                                {`}`}<br />
+                            </div>
                             {`}`}<br />
                         </code>
                     </div>
@@ -123,17 +141,20 @@ export class Form extends React.Component {
 
 
             {/* result */}
-            <section id="form-results">
-                <label id="result-label" htmlFor="result">Suggested Name: </label>
-                { this.state.reviewerType === ReviewerTypes.JONES.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
-                    ? <p> Jones:
-                        <span className="code-like">{ this.state.jonesName}</span>
-                    </p> : ''}
-                { this.state.reviewerType === ReviewerTypes.JEREMY.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
-                    ? <p> Jeremy: 
-                        <span className="code-like">{ this.state.jeremyName}</span>
-                    </p> : ''}
-            </section>
+            { this.state.reviewerType === ReviewerTypes.BEN.answer
+                ? ''
+                : <section id="form-results">
+                    <label id="result-label" htmlFor="result">Suggested Name: </label>
+                    { this.state.reviewerType === ReviewerTypes.JONES.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
+                        ? <p> Jones:
+                            <span className="code-like">{ this.state.jonesName}</span>
+                        </p> : ''}
+                    { this.state.reviewerType === ReviewerTypes.JEREMY.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
+                        ? <p> Jeremy: 
+                            <span className="code-like">{ this.state.jeremyName}</span>
+                        </p> : ''}
+                </section>
+            }
             <hr />
             <br />
         </form>);

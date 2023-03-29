@@ -42,6 +42,10 @@
     margin: .5em;
     padding: .2em .5em;
 }
+
+.contain {
+    max-width: 600px;
+}
 .tab {
     padding-left: 2em
 }
