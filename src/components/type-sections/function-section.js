@@ -26,12 +26,15 @@ export class FunctionSection extends React.Component {
         this.updateCommand = this.updateCommand.bind(this);
         this.onSelectCommandPlural = this.onSelectCommandPlural.bind(this);
 
+        this.onSelectQueryRepo = this.onSelectQueryRepo.bind(this);
         this.updateQueryRecord = this.updateQueryRecord.bind(this);
         this.onSelectQueryRecordPlural = this.onSelectQueryRecordPlural.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
         this.onSelectQueryPropertyPlural = this.onSelectQueryPropertyPlural.bind(this);
 
         this.buildName = this.buildName.bind(this);
+
+        this.unacceptable = this.unacceptable.bind(this);
     }
 
     onSelectType (selection) {
@@ -49,6 +52,9 @@ export class FunctionSection extends React.Component {
         this.setState({ commandPlural: selection }, this.buildName);
     }
 
+    onSelectQueryRepo(selection) {
+        this.setState({ queryRepo: selection }, this.buildName);
+    }
     updateQueryRecord(input) {
         this.setState({ queryRecord: input }, this.buildName);
     }
@@ -62,11 +68,21 @@ export class FunctionSection extends React.Component {
         this.setState({ queryPropertyPlural: selection }, this.buildName);
     }
 
+    unacceptable() {
+        return (this.state.functionType === FunctionTypes.BOTH.answer
+            && this.state.queryRepo === Binary.TRUE.answer);
+    }
+
     buildName () {
+        if (this.unacceptable) {
+            const message = 'For Shame';
+            this.props.updateName({ jonesName: message, jeremyName: message });
+        }
         const {
             command,
             commandRecord,
             commandPlural,
+            queryRepo,
             query,
             queryRecord,
             queryRecordPlural,
@@ -92,16 +108,19 @@ export class FunctionSection extends React.Component {
                 }
                 break;
             case FunctionTypes.QUERY.answer:
-                if (queryRecord) {
-                    const jonesNameParts = [ 'get' ];
-                    const jeremyNameParts = [ 'get' ];
+                if (queryRecord || (queryRepo === Binary.TRUE.answer && query)) {
+                    const verb = queryRepo === Binary.TRUE.answer ? 'find' : 'get'
+                    const jonesNameParts = [ verb ];
+                    const jeremyNameParts = [ verb ];
                     
-                    jeremyNameParts.push(queryRecordPlural === Binary.TRUE.answer
-                        ? Formatter.toPlural(Formatter.jeremyTruncate(queryRecord))
-                        : Formatter.jeremyTruncate(queryRecord))
-                    jonesNameParts.push(queryRecordPlural === Binary.TRUE.answer
-                        ? Formatter.toPlural(queryRecord)
-                        : queryRecord);
+                    if (queryRepo !== Binary.TRUE.answer) {
+                        jeremyNameParts.push(queryRecordPlural === Binary.TRUE.answer
+                            ? Formatter.toPlural(Formatter.jeremyTruncate(queryRecord))
+                            : Formatter.jeremyTruncate(queryRecord))
+                        jonesNameParts.push(queryRecordPlural === Binary.TRUE.answer
+                            ? Formatter.toPlural(queryRecord)
+                            : queryRecord);    
+                    }
 
                     if (query) {
                         jonesNameParts.push('by');
@@ -175,7 +194,8 @@ export class FunctionSection extends React.Component {
                 onSelection={this.onSelectType}
             />
 
-            { this.state.functionType === FunctionTypes.COMMAND.answer || this.state.functionType === FunctionTypes.BOTH.answer
+            { (this.state.functionType === FunctionTypes.COMMAND.answer || this.state.functionType === FunctionTypes.BOTH.answer)
+                && !this.unacceptable()
             ? <fieldset className="form-set">
                 <legend>Command Settings</legend>
                 <FormInput label="How the data/record is changed (verb)" onUpdate={this.updateCommand}/>
@@ -191,20 +211,44 @@ export class FunctionSection extends React.Component {
             { this.state.functionType === FunctionTypes.QUERY.answer || this.state.functionType === FunctionTypes.BOTH.answer
             ? <fieldset className="form-set">
                 <legend>Query Settings</legend>
-                <FormInput label="The query data/record type (noun)" onUpdate={this.updateQueryRecord}/>
                 <FormRadioSet
-                    question="Can it return multiple data/records?"
-                    identifier="plural-query-record"
+                    question="Is this function in a repo?"
+                    identifier="query-repo"
                     answers={Object.values(Binary)}
-                    onSelection={this.onSelectQueryRecordPlural}
+                    onSelection={this.onSelectQueryRepo}
                 />
-                <FormInput label="If not fetching instances of the data/record type, what property are they chosen by?" onUpdate={this.updateQuery}/>
-                <FormRadioSet
-                    question="Is the property an array or single value?"
-                    identifier="plural-query-property"
-                    answers={Object.values(Binary)}
-                    onSelection={this.onSelectQueryPropertyPlural}
-                />
+                {   this.state.queryRepo !== Binary.TRUE.answer
+                    ? <FormInput label="The query data/record type (noun)" onUpdate={this.updateQueryRecord}/>
+                    : ''
+                }
+                {   this.state.queryRepo !== Binary.TRUE.answer
+                    ? <FormRadioSet
+                        question="Can it return multiple data/records?"
+                        identifier="plural-query-record"
+                        answers={Object.values(Binary)}
+                        onSelection={this.onSelectQueryRecordPlural}
+                    /> : ''
+                }
+                {   this.unacceptable()
+                    ? ''
+                    : <FormInput label="If not fetching instances of the data/record type, what property are they chosen by?" onUpdate={this.updateQuery}/>
+                }
+                {   this.unacceptable()
+                    ? ''
+                    : <FormRadioSet
+                        question="Is the property an array or single value?"
+                        identifier="plural-query-property"
+                        answers={Object.values(Binary)}
+                        onSelection={this.onSelectQueryPropertyPlural}
+                     />
+                }
+                {   this.unacceptable()
+                ? <p>
+                    Why would you do this to the Repo?<br />
+                    You bring <b>shame</b> to the proud Repo.
+                    </p>
+                : ''
+                }
             </fieldset>
             : '' }
          </div>);
