@@ -11,6 +11,7 @@ const SupportedTypes = {
     CLASS: { answer: 'Class' },
     OBJECT: { answer: 'Object' },
     ARRAY: { answer: 'Array' },
+    Record: { answer: 'Custom Record' },
 };
 
 const ReviewerTypes = {
@@ -144,7 +145,8 @@ export class Form extends React.Component {
             { this.state.reviewerType === ReviewerTypes.BEN.answer
                 ? ''
                 : <section id="form-results">
-                    <label id="result-label" htmlFor="result">Suggested Name: </label>
+                    <br />
+                    <label id="result-label" htmlFor="result">Suggested Name </label>
                     { this.state.reviewerType === ReviewerTypes.JONES.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
                         ? <p> Jones:
                             <span className="code-like">{ this.state.jonesName}</span>
