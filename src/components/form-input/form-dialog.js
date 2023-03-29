@@ -10,7 +10,6 @@ export class FormDialog extends React.Component {
 
     render() {
         return (<div>
-            here {this.props.open}
             <dialog className="dialog" open={this.props.open}>
                 <p>
                     {this.props.message}

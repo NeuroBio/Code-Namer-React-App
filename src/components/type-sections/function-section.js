@@ -1,8 +1,9 @@
 import React from 'react';
-import './section.css'
+import './function.css'
 import { Formatter } from '../../services/formatter';
 import { FormRadioSet } from '../form-input/form-radioset';
 import { FormInput } from '../form-input/form-input';
+import { SoapOpera } from '../form-input/soap-opera';
 
 
 const FunctionTypes = {
@@ -243,11 +244,13 @@ export class FunctionSection extends React.Component {
                      />
                 }
                 {   this.unacceptable()
-                ? <p>
-                    Why would you do this to the Repo?<br />
-                    You bring <b>shame</b> to the proud Repo.
+                ? <div class="side-by-side">
+                    <p>
+                        Why would you do this to the Repo?<br />
+                        You bring <b>shame</b> to the proud Repo.<br />
                     </p>
-                : ''
+                    <SoapOpera />
+                </div> : ''
                 }
             </fieldset>
             : '' }

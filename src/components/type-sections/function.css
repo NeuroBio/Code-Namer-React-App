@@ -1,0 +1,10 @@
+.form-set {
+    width: 100%;
+    max-width: 500px;
+}
+
+.side-by-side {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
