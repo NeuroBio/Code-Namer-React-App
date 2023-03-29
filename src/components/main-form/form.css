@@ -35,9 +35,13 @@
     font-size: 1em;
     font-weight: bold;
 }
-#result {
+.code-like {
     font-size: 1em;
     font-family:'Courier New', Courier, monospace;
-    background-color: black;
+    background-color: #171c24;
     margin: .5em;
+    padding: .2em .5em;
+}
+.tab {
+    padding-left: 2em
 }

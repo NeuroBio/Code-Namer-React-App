@@ -16,7 +16,8 @@ const SupportedTypes = {
 const ReviewerTypes = {
     JONES: { answer: 'Jones', help: 'verbose = true', default: true },
     JEREMY: { answer: 'Jeremy', help: 'verbose = false'},
-    BOTH: { answer: 'Both', help: 'verbose = trufalse'},
+    BOTH: { answer: 'Both Js', help: 'verbose = trufalse'},
+    BEN: { answer: 'Ben', help: 'verbose = memes'},
 }
 
 export class Form extends React.Component {
@@ -88,35 +89,49 @@ export class Form extends React.Component {
                     onSelection={this.onSelectReviewerType}
                 />
             </section>
-            <section className="section-form-inputs">
-                { this.state.codeType === SupportedTypes.FUNCTION.answer
-                    ? <FunctionSection
-                        updateName={this.updateName}
-                    /> : ''}
-                { this.state.codeType === SupportedTypes.CLASS.answer
-                    ? <ClassSection
-                        updateName={this.updateName}
-                    /> : ''}
-                { this.state.codeType === SupportedTypes.OBJECT.answer
-                    ? <ObjectSection
-                        updateName={this.updateName}
-                    /> : ''}
-                { this.state.codeType === SupportedTypes.ARRAY.answer
-                    ? <ArraySection
-                        updateName={this.updateName}
-                    /> : ''}
-            </section>
+            { this.state.reviewerType === ReviewerTypes.BEN.answer
+                ? <section className="section-form-inputs">
+                    <div className="code-like">
+                        <code>
+                            {`codeHelper (helpMe) {`}<br />
+                            <span className="tab">
+                            {`_getHelp(helpMe)`}<br />
+                            </span>
+                            {`}`}<br />
+                        </code>
+                    </div>
+                </section>
+                : <section className="section-form-inputs">
+                    { this.state.codeType === SupportedTypes.FUNCTION.answer
+                        ? <FunctionSection
+                            updateName={this.updateName}
+                        /> : ''}
+                    { this.state.codeType === SupportedTypes.CLASS.answer
+                        ? <ClassSection
+                            updateName={this.updateName}
+                        /> : ''}
+                    { this.state.codeType === SupportedTypes.OBJECT.answer
+                        ? <ObjectSection
+                            updateName={this.updateName}
+                        /> : ''}
+                    { this.state.codeType === SupportedTypes.ARRAY.answer
+                        ? <ArraySection
+                            updateName={this.updateName}
+                        /> : ''}
+                </section>
+            }
+
 
             {/* result */}
             <section id="form-results">
                 <label id="result-label" htmlFor="result">Suggested Name: </label>
                 { this.state.reviewerType === ReviewerTypes.JONES.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
                     ? <p> Jones:
-                        <span id="result">{ this.state.jonesName}</span>
+                        <span className="code-like">{ this.state.jonesName}</span>
                     </p> : ''}
                 { this.state.reviewerType === ReviewerTypes.JEREMY.answer || this.state.reviewerType === ReviewerTypes.BOTH.answer
                     ? <p> Jeremy: 
-                        <span id="result">{ this.state.jeremyName}</span>
+                        <span className="code-like">{ this.state.jeremyName}</span>
                     </p> : ''}
             </section>
             <hr />
