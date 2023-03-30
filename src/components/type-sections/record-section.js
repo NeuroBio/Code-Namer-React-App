@@ -9,7 +9,10 @@ export class RecordSection extends React.Component {
         this.state = {};
 
         this.suggest = this.suggest.bind(this);
-        // this.buildName = this.buildName.bind(this);
+    }
+
+    componentDidMount() {
+        this.suggest();
     }
 
     suggest () {
