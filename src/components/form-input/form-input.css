@@ -63,6 +63,7 @@
 
 .dialog {
     border-radius: 1.5em;
+    width: min(500px, 100vw);
     background-color: #171c24;
     color: whitesmoke;
     position: fixed;

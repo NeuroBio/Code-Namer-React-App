@@ -12,7 +12,7 @@ const MessagesFromTheChef = {
     10: 'Your discontented actions remain futile.',
     25: '',
     40: 'Oh... Are you still here?',
-    70: 'Are you aware that you clicked that button at least 70 times?  Are you also aware that the most addictive schedule for positive reinforcement is "variable ratio," where a reward is given after a changing number of responses.  If I say this is the last message, will you believe me, or will you keep clicking, believing that I am lying and there is a further reward at a higher click increment?  The experiment begins.'
+    70: 'Are you aware that you clicked that button at least 70 times?  Are you also aware that the most addictive schedule for positive reinforcement is "variable ratio," where a reward is given after a changing number of responses.  If I say this is the last message, will you believe me?  Or will you keep clicking, believing that I am lying, and there is a further reward at a higher click increment?  The experiment begins.'
 }
 export class PastaShop extends React.Component {
     constructor(props) {
