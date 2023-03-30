@@ -13,10 +13,9 @@ export class RecordSection extends React.Component {
     }
 
     suggest () {
-        const name = NameSuggestor.suggestRecordName();
-        const jonesName = Formatter.combineAllNameParts(name);
-        const jeremyName = Formatter.combineAllNameParts([name.pop()]);
-        this.setState({ jonesName, jeremyName });
+        const jonesName = Formatter.combineAllNameParts(NameSuggestor.suggestRecordName());
+        const jeremyName = Formatter.combineAllNameParts(NameSuggestor.suggestRecordName(2));
+        this.props.updateName({ jonesName, jeremyName });
     }
 
     render() {
