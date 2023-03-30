@@ -48,7 +48,7 @@ export class SoapOpera extends React.Component {
                     message: 'Don’t you remember our agreement?  You would take care of the business in your domain objects and services and I would pick up our record children from database daycare.',
                     buttons: [
                       {
-                          text: 'Of course, darling!  But this function has to be a command query.',
+                          text: 'I remember, but things are different now. The business has become too complex to compartmentalize like that.  Can’t you compromise with me this for once?',
                           onClick: () => this.changeScene(Scenes.GUILT),
                       }, {
                           text: 'I was actually hoping to retire.  You can handle the business AND the record kids, right?',
@@ -69,7 +69,7 @@ export class SoapOpera extends React.Component {
                     ],  
                 }, {
                     name: Scenes.GUILT,
-                    message: 'No, I wan’t compromise.  This was our deal. Our wedding vow!  I will not take your on business responsibilities.',
+                    message: 'No, I wan’t compromise.  Complexity is the very reason we compartmentalize.  That was our deal. Our wedding vow!  I will not take your on business responsibilities.',
                     buttons: [
                       {
                           text: '*sigh* You’re right as always. Can you ever forgive me?',
