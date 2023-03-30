@@ -5,13 +5,14 @@ import { FunctionSection } from '../type-sections/function-section';
 import { ClassSection } from '../type-sections/class-section';
 import { ObjectSection } from '../type-sections/object-section';
 import { ArraySection } from '../type-sections/array-section';
+import { RecordSection } from '../type-sections/record-section';
 
 const SupportedTypes = {
     FUNCTION: { answer: 'Function' },
     CLASS: { answer: 'Class' },
     OBJECT: { answer: 'Object' },
     ARRAY: { answer: 'Array' },
-    Record: { answer: 'Custom Record' },
+    RECORD: { answer: 'Custom Record' },
 };
 
 const ReviewerTypes = {
@@ -135,6 +136,10 @@ export class Form extends React.Component {
                         /> : ''}
                     { this.state.codeType === SupportedTypes.ARRAY.answer
                         ? <ArraySection
+                            updateName={this.updateName}
+                        /> : ''}
+                    { this.state.codeType === SupportedTypes.RECORD.answer
+                        ? <RecordSection
                             updateName={this.updateName}
                         /> : ''}
                 </section>
