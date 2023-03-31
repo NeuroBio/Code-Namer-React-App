@@ -13,18 +13,16 @@ export class SillyEffects {
             size = 'large';
         }
 
-        console.log(size)
         return size;
     }
 
-    static getStarStyle () {   
+    static getStarStyle () {
         const css = {
             top: (Math.random() * 100) + '%',
             left: (Math.random() * 100) + '%',
-            webkitAnimationDelay: (Math.random() * sparkle) + 's',
-            mozAnimationDelay: (Math.random() * sparkle) + 's'
+            WebkitAnimationDelay: (Math.random() * sparkle) + 's',
+            MozAnimationDelay: (Math.random() * sparkle) + 's'
         };
-        console.log(css);
         return css;
     }
 }

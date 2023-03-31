@@ -56,7 +56,7 @@ export class Form extends React.Component {
     }
 
     onSparkle (newState) {
-        this.setState({ sparkleMode : newState });
+        this.setState({ sparkleMode: newState });
     }
 
     submitHandler(e) {
