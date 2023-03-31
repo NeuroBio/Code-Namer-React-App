@@ -9,6 +9,7 @@ import { RecordSection } from '../type-sections/record-section';
 import { Sparkles } from '../form-input/sparkles';
 import { VisualSnow } from '../form-input/visual-snow';
 import { FormToggle } from '../form-input/form-toggle';
+import { StickyNote } from '../form-input/sticky-note';
 
 const SupportedTypes = {
     FUNCTION: { answer: 'Function' },
@@ -91,6 +92,8 @@ export class Form extends React.Component {
                 </p>
             </section>
             <hr />
+            <StickyNote />
+
 
             {/* the form contents */}
             <section className="main-form-inputs">

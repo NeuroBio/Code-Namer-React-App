@@ -82,3 +82,42 @@ background-size: 100% 100%;
   @keyframes b {
     100% {background-position: 50% 0, 60% 50%}
   }
+
+  /* sticky note */
+  /* https://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934 */
+
+  .sticky-note {
+    text-decoration: none;
+    color: #000;
+    background: #ffc;
+    display: block;
+    height: 11em;
+    width: 11em;
+    padding: 0em 1em 1em 1em;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    transform: rotate(6deg);
+    transition: transform .15s linear;
+    /* added by me */
+    position: fixed;
+    left: 650px;
+    top: 80px
+  }
+
+  .sticky-note:hover, .sticky-note:focus {
+    box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+    transform: scale(1.25);
+    z-index: 5;
+  }
+
+  .note {
+    font-family: 'Reenie Beanie';
+    font-size: 1.4em;
+  }
+
+  @font-face {
+    font-family: 'Reenie Beanie';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/reeniebeanie/v16/z7NSdR76eDkaJKZJFkkjuvWxXPq1qw.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
