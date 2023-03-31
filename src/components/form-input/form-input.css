@@ -80,12 +80,13 @@
 /* slider */
 /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch */
 .toggle-box {
-    margin: 1em;
+    display: flex;
+    margin: .2em;
 }
 
 .toggle-text {
     display: block;
-    margin-bottom: .5em;
+    margin-left: .5em;
 }
 .switch {
     position: relative;

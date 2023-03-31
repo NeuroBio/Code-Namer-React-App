@@ -1,5 +1,5 @@
 import React from 'react';
-import './starshine.css';
+import './silly-effects.css';
 import { SillyEffects } from '../../services/silly-effects';
 
 export class Sparkles extends React.Component {
@@ -20,7 +20,7 @@ export class Sparkles extends React.Component {
     }
 
     render() {
-        return (<div id="starshine">
+        return (<div className="overlay-screen">
             {this.state.stars}
         </div>)
     }

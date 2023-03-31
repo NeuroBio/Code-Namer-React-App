@@ -19,7 +19,6 @@ export class FormToggle extends React.Component {
 
     render() {
         return (<div className="toggle-box">
-            <span className="toggle-text">{this.props.label}</span>
             <label className="switch">
                 <input
                     type="checkbox"
@@ -27,6 +26,7 @@ export class FormToggle extends React.Component {
                     onChange={this.onToggle} />
                 <span className="slider round"></span>
             </label>
+            <span className="toggle-text">{this.props.label}</span>
         </div>);
     }
 }

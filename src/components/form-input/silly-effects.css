@@ -1,5 +1,5 @@
 /* https://codepen.io/kucsatax/pen/vyWevX */
-#starshine {
+.overlay-screen {
     pointer-events: none;
     position: absolute;
     top: 0;
@@ -66,3 +66,19 @@ background-size: 100% 100%;
     opacity: 0;
     }
 }
+
+
+/* https://codepen.io/t_afif/pen/oNdKYge */
+/* TV Static */
+
+.static {
+    opacity: .1;
+    background: 
+      repeating-radial-gradient(#000 0 0.0001%,#fff 0 0.0002%) 50% 0/2500px 2500px,
+      repeating-conic-gradient(#000 0 0.0001%,#fff 0 0.0002%) 60% 60%/2500px 2500px;
+    background-blend-mode: difference;
+    animation: b .5s infinite alternate;
+  }
+  @keyframes b {
+    100% {background-position: 50% 0, 60% 50%}
+  }

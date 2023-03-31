@@ -7,6 +7,7 @@ import { ObjectSection } from '../type-sections/object-section';
 import { ArraySection } from '../type-sections/array-section';
 import { RecordSection } from '../type-sections/record-section';
 import { Sparkles } from '../form-input/sparkles';
+import { VisualSnow } from '../form-input/visual-snow';
 import { FormToggle } from '../form-input/form-toggle';
 
 const SupportedTypes = {
@@ -32,6 +33,7 @@ export class Form extends React.Component {
             jonesName: '',
             codeType: '',
             sparkleMode: false,
+            snowMode: false,
             reviewerType: ReviewerTypes.JONES.answer,
         }
 
@@ -39,6 +41,7 @@ export class Form extends React.Component {
         this.onSelectCodeType = this.onSelectCodeType.bind(this);
         this.onSelectReviewerType = this.onSelectReviewerType.bind(this);
         this.onSparkle = this.onSparkle.bind(this);
+        this.onSnow = this.onSnow.bind(this);
     }
 
 
@@ -59,13 +62,18 @@ export class Form extends React.Component {
         this.setState({ sparkleMode: newState });
     }
 
+    onSnow (newState) {
+        this.setState({ snowMode: newState });
+    }
+
     submitHandler(e) {
         e.preventDefault();
     }
 
     render () {
         return (<form onSubmit={this.submitHandler}>
-            { this.state.sparkleMode ? <Sparkles stars={125} /> : ''}
+            { this.state.sparkleMode ? <Sparkles stars={125} /> : '' }
+            { this.state.snowMode ? <VisualSnow />  : '' }
             {/* intro */}
             <section className="long-text" id="mission-statement">
                 <p>
@@ -99,9 +107,11 @@ export class Form extends React.Component {
                     onSelection={this.onSelectReviewerType}
                 />
 
-                <div>
-                    <FormToggle label="Sparkle Mode" onToggle={this.onSparkle} />
-                </div>
+                <fieldset>
+                    <legend>View Modes</legend>
+                    <FormToggle label="Sparkle" onToggle={this.onSparkle} />
+                    <FormToggle label="Visual Snow" onToggle={this.onSnow} />
+                </fieldset>
             </section>
             { this.state.reviewerType === ReviewerTypes.BEN.answer
                 ? <section className="section-form-inputs">
