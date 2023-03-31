@@ -6,6 +6,7 @@ import { ClassSection } from '../type-sections/class-section';
 import { ObjectSection } from '../type-sections/object-section';
 import { ArraySection } from '../type-sections/array-section';
 import { RecordSection } from '../type-sections/record-section';
+import { Sparkles } from '../form-input/sparkles';
 
 const SupportedTypes = {
     FUNCTION: { answer: 'Function' },
@@ -29,13 +30,13 @@ export class Form extends React.Component {
             jeremyName: '',
             jonesName: '',
             codeType: '',
+            sparkleMode: false,
             reviewerType: ReviewerTypes.JONES.answer,
         }
 
         this.updateName = this.updateName.bind(this);
         this.onSelectCodeType = this.onSelectCodeType.bind(this);
         this.onSelectReviewerType = this.onSelectReviewerType.bind(this);
-
     }
 
 
@@ -58,6 +59,7 @@ export class Form extends React.Component {
 
     render () {
         return (<form onSubmit={this.submitHandler}>
+            { this.state.sparkleMode ? <Sparkles stars={100} /> : ''}
             {/* intro */}
             <section className="long-text" id="mission-statement">
                 <p>
