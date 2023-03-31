@@ -7,6 +7,7 @@ import { ObjectSection } from '../type-sections/object-section';
 import { ArraySection } from '../type-sections/array-section';
 import { RecordSection } from '../type-sections/record-section';
 import { Sparkles } from '../form-input/sparkles';
+import { FormToggle } from '../form-input/form-toggle';
 
 const SupportedTypes = {
     FUNCTION: { answer: 'Function' },
@@ -37,6 +38,7 @@ export class Form extends React.Component {
         this.updateName = this.updateName.bind(this);
         this.onSelectCodeType = this.onSelectCodeType.bind(this);
         this.onSelectReviewerType = this.onSelectReviewerType.bind(this);
+        this.onSparkle = this.onSparkle.bind(this);
     }
 
 
@@ -53,13 +55,17 @@ export class Form extends React.Component {
         this.setState({ jeremyName: input?.jeremyName || '' });
     }
 
+    onSparkle (newState) {
+        this.setState({ sparkleMode : newState });
+    }
+
     submitHandler(e) {
         e.preventDefault();
     }
 
     render () {
         return (<form onSubmit={this.submitHandler}>
-            { this.state.sparkleMode ? <Sparkles stars={100} /> : ''}
+            { this.state.sparkleMode ? <Sparkles stars={125} /> : ''}
             {/* intro */}
             <section className="long-text" id="mission-statement">
                 <p>
@@ -92,6 +98,10 @@ export class Form extends React.Component {
                     answers={Object.values(ReviewerTypes)}
                     onSelection={this.onSelectReviewerType}
                 />
+
+                <div>
+                    <FormToggle label="Sparkle Mode" onToggle={this.onSparkle} />
+                </div>
             </section>
             { this.state.reviewerType === ReviewerTypes.BEN.answer
                 ? <section className="section-form-inputs">
